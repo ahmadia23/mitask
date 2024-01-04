@@ -1,5 +1,8 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import * as stylex from "@stylexjs/stylex";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,8 +15,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" {...stylex.props(styles.html, styles.reset)}>
+      <body {...stylex.props(styles.reset, styles.body)}>{children}</body>
     </html>
   );
 }
+
+const DARK = "@media (prefers-color-scheme: dark)";
+
+const styles = stylex.create({
+  html: {
+    colorScheme: "light dark",
+    height: "100vh",
+    padding: 0,
+    margin: 0,
+  },
+  reset: {
+    minHeight: "100%",
+    margin: 0,
+    padding: 0,
+  },
+  body: {
+    backgroundImage: {
+      default: "linear-gradient(to bottom, rgb(214, 219, 220), white)",
+      [DARK]: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
+    },
+    height: "100vh",
+  },
+});
