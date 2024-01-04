@@ -1,0 +1,58 @@
+// Define color palette
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-accent: #606689; // Assuming this is an accent color
+
+// Spacing variables
+$gap-large: 32px; // Default gap for UX elements
+$gap-medium: 24px; // Gap between cards
+$gap-small: 8px; // Gap between texts
+
+// Media query breakpoint
+$mobile-breakpoint: 1000px;
+
+// Mobile spacing adjustments
+$gap-large-mobile: 24px;
+$gap-medium-mobile: 16px;
+
+// Base styles
+body {
+  background-color: $color-white;
+  color: $color-black;
+  // Add other base styles as needed
+}
+
+// Utility classes for spacing
+.gap-large {
+  gap: $gap-large;
+
+  @media (max-width: $mobile-breakpoint) {
+    gap: $gap-large-mobile;
+  }
+}
+
+.gap-medium {
+  gap: $gap-medium;
+
+  @media (max-width: $mobile-breakpoint) {
+    gap: $gap-medium-mobile;
+  }
+}
+
+.gap-small {
+  gap: $gap-small;
+}
+
+// Card component (example)
+.card {
+  background-color: $color-white;
+  border: 1px solid $color-accent;
+  // Add other card styles as needed
+}
+
+// Text component (example)
+.text {
+  margin-bottom: $gap-small;
+}
+
+// Add more specific styles as needed
