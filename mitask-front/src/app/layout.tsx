@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import * as stylex from "@stylexjs/stylex";
+import Navbar from "@/ui/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" {...stylex.props(styles.html, styles.reset)}>
-      <body {...stylex.props(styles.reset, styles.body)}>{children}</body>
+      <body {...stylex.props(styles.reset, styles.body)}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
@@ -36,8 +40,9 @@ const styles = stylex.create({
     padding: 0,
   },
   body: {
-    backgroundImage: {
-      default: "linear-gradient(to bottom, rgb(214, 219, 220), white)",
+    fontFamily: stylex.firstThatWorks("Lato", "Open Sans", "sans-serif"),
+    backgroundColor: {
+      default: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
       [DARK]: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
     },
     height: "100vh",
