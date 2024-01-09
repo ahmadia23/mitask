@@ -83,7 +83,7 @@ const Cards: React.FC<CardProps> = ({ title, content, image }) => {
 
   return (
     <div
-      {...stylex.props(styles.card, styles.animations)}
+      {...stylex.props(styles.card)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
