@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Bloc from "./Bloc";
+import Bloc from "../Bloc";
 import * as stylex from "@stylexjs/stylex";
-import { globals } from "./styles";
+import { globals } from "../styles";
 
 const styles = stylex.create({
   callToActionText: {

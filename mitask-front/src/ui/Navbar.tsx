@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import { Link } from "react-scroll";
 import { fontVars, globals } from "./styles";
+import useScrollStatus from "@/hooks/useScrollStatus";
 
 const DARK = "@media (prefers-color-scheme: dark)";
 
@@ -46,31 +47,7 @@ const styles = stylex.create({
 });
 
 const Navbar: React.FC = () => {
-  const [scrolling, setScrolling] = useState({
-    lastValue: 0,
-    status: false,
-  });
-
-  useEffect(() => {
-    let lastScrollY: number;
-
-    if (typeof window !== undefined) {
-      lastScrollY = window.scrollY;
-    }
-
-    const handleScroll = () => {
-      setScrolling({
-        ...scrolling,
-        status:
-          window.scrollY > 200 && Math.abs(window.scrollY - lastScrollY) > 5,
-      });
-      lastScrollY = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const scrolling = useScrollStatus();
 
   return (
     <nav

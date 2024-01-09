@@ -1,9 +1,9 @@
-import CardsSection from "@/ui/CardsSection";
-import HomeHeader from "@/ui/HomeHeader";
+import CardsSection from "@/ui/sections/CardsSection";
+import HomeHeader from "@/ui/sections/HomeHeader";
 import Navbar from "@/ui/Navbar";
-import ProductPlusValue from "@/ui/ProductPlusValue";
-import AvantagesMitask from "@/ui/AvantagesMitask";
-import CallToActionSection from "@/ui/CallToActionSection";
+import ProductPlusValue from "@/ui/sections/ProductPlusValue";
+import AvantagesMitask from "@/ui/sections/AvantagesMitask";
+import CallToActionSection from "@/ui/sections/CallToActionSection";
 
 export default function Home() {
   return (

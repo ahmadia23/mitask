@@ -1,8 +1,8 @@
 import React from "react";
-import Bloc from "./Bloc";
-import Cards from "./Cards";
+import Bloc from "../Bloc";
+import Cards from "../Cards";
 import * as stylex from "@stylexjs/stylex";
-import { globals } from "./styles";
+import { globals } from "../styles";
 
 const cardsData = [
   {

@@ -1,7 +1,7 @@
 "use client";
 
 import * as stylex from "@stylexjs/stylex";
-import { globals, spacing } from "./styles.ts";
+import { globals, spacing } from "../styles.ts";
 import useWindowSize from "@/hooks/useWindowsSize.ts";
 
 const styles = stylex.create({

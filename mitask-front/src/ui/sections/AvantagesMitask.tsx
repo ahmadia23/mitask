@@ -2,7 +2,7 @@ import { IMG_SHOWCASE_HEIGHT, IMG_SHOWCASE_WIDTH, globals } from "@/ui/styles";
 import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
 import React from "react";
-import Bloc from "./Bloc";
+import Bloc from "../Bloc";
 
 const styles = stylex.create({
   imageAndText: {

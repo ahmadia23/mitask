@@ -1,7 +1,7 @@
 import React from "react";
-import Bloc from "./Bloc";
+import Bloc from "../Bloc";
 import Image from "next/image";
-import { IMG_SHOWCASE_HEIGHT, IMG_SHOWCASE_WIDTH, globals } from "./styles";
+import { IMG_SHOWCASE_HEIGHT, IMG_SHOWCASE_WIDTH, globals } from "../styles";
 import * as stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
