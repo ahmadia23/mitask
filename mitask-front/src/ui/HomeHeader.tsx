@@ -6,10 +6,11 @@ import useWindowSize from "@/hooks/useWindowsSize.ts";
 
 const styles = stylex.create({
   bg: {
-    backgroundImage: "url('/home-bg.jpg')",
+    backgroundImage: "url('/cofee-task.jpg')",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    height: "100vh",
   },
 
   greyBackground: {

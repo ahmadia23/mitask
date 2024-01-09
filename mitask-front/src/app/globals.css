@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
 }
 
 h1,
@@ -10,4 +9,8 @@ h3,
 h4,
 h5 {
   font-family: "Roboto Slab", "Montserrat", sans-serif;
+}
+
+p {
+  font-family: "Open Sans', sans-serif;";
 }

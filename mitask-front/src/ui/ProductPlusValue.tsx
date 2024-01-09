@@ -13,11 +13,8 @@ const styles = stylex.create({
 
 const ProductPlusValue: React.FC = () => {
   return (
-    <Bloc>
-      <div
-        {...stylex.props(globals.flexLayout, styles.imageAndText)}
-        id="why_mitask"
-      >
+    <Bloc id="why_mitask">
+      <div {...stylex.props(globals.flexLayout, styles.imageAndText)}>
         <Image
           src={"/happy-business.jpg"}
           alt="task-agenda"
@@ -34,6 +31,25 @@ const ProductPlusValue: React.FC = () => {
           obstacles, concentrez-vous sur ce qui compte vraiment et transformez
           vos ambitions en réalités.
         </h5>
+      </div>
+
+      <div {...stylex.props(globals.flexLayout, styles.imageAndText)}>
+        <h5
+          {...stylex.props(globals.h5, styles.imageAndText, globals.blocText)}
+        >
+          Vivez l'expérience{" "}
+          <span {...stylex.props(globals.accentText)}>MiTask</span> dès
+          aujourd'hui. Inscrivez-vous pour un essai gratuit et découvrez comment
+          nous pouvons révolutionner votre gestion de tâches. Rejoignez la
+          communauté des innovateurs et commencez votre voyage vers une
+          productivité sans limite.
+        </h5>
+        <Image
+          src={"/innovateur.jpg"}
+          alt="task-agenda"
+          width={IMG_SHOWCASE_WIDTH}
+          height={IMG_SHOWCASE_HEIGHT}
+        />
       </div>
     </Bloc>
   );

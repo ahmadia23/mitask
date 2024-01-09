@@ -13,11 +13,11 @@ const styles = stylex.create({
 
 const AvantagesMitask: React.FC = () => {
   return (
-    <Bloc>
+    <Bloc id="avantages">
       <div
         {...stylex.props(globals.centered, globals.spacingBetweenImageAndText)}
       >
-        <h3 {...stylex.props(globals.h3)} id="avantages">
+        <h3 {...stylex.props(globals.h3)}>
           Bienvenue dans l'ère de l'efficacité et de la clarté
           organisationnelle.
         </h3>

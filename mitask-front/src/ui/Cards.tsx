@@ -1,53 +1,104 @@
-import * as React from "react";
+"use client";
+
+import React, { useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
-import { IMG_SHOWCASE_HEIGHT, IMG_SHOWCASE_WIDTH } from "./styles";
+import { globals } from "./styles";
+
+// const fadeIn = stylex.keyframes({
+//   "0%": { opacity: 0 },
+//   "100%": { opacity: 1 },
+// });
+
+// const fadeOut = stylex.keyframes({
+//   "0%": { opacity: 1 },
+//   "100%": { opacity: 0 },
+// });
 
 // Styles définis avec StyleX
 const styles = stylex.create({
   card: {
     border: "1px solid #d3d3d3",
-    borderRadius: "8px",
+    position: "relative",
     overflow: "hidden",
-    width: "300px",
+    borderRadius: 8,
+    width: 370,
+    height: 370,
+
+    ":hover": {
+      cursor: "pointer",
+    },
+    ":hover img": {
+      filter: "brightness(40%)",
+      transform: "scale(1.1)",
+    },
   },
-  cardImage: {
-    height: "200px",
-    backgroundColor: "#f0f0f0",
-    // Ajoutez des styles d'image de fond ici
-  },
+
   cardContent: {
-    padding: "16px",
+    width: "100%",
+    color: "white",
+    fontWeight: "1000",
   },
   cardHeading: {
+    textAlign: "center",
+    position: "absolute",
+    top: 140,
+    width: "100%",
     marginTop: "0",
-    color: "#1a1a1a",
   },
   cardText: {
-    color: "#333",
-    fontSize: "14px",
+    padding: 16,
+    position: "absolute",
+    lineHeight: 1.4,
+    top: 200,
+    opacity: 0,
   },
+
+  imgStyle: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    transition: "1.2s",
+    filter: "brightness(70%)",
+  },
+
+  textReveal: {
+    opacity: 1,
+  },
+
+  // animations: {
+  //   animationName: fadeIn,
+  //   animationDuration: "2s",
+  // },
 });
 
 type CardProps = {
   title: string;
   content: string;
+  image: string;
 };
 
-const Cards: React.FC<CardProps> = ({ title, content }) => {
+const Cards: React.FC<CardProps> = ({ title, content, image }) => {
+  const [hovered, setIsHovered] = useState<boolean>(false);
+
   return (
-    <div {...stylex.props(styles.card)}>
-      <h3 {...stylex.props(styles.cardHeading)}>{title}</h3>
-      <div {...stylex.props(styles.cardImage)}>
-        <Image
-          src={"/task-agenda.jpg"}
-          alt="task-agenda"
-          width={IMG_SHOWCASE_WIDTH}
-          height={IMG_SHOWCASE_HEIGHT}
-        />
-      </div>
+    <div
+      {...stylex.props(styles.card, styles.animations)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <img src={image} alt="task-agenda" {...stylex.props(styles.imgStyle)} />
       <div {...stylex.props(styles.cardContent)}>
-        <p {...stylex.props(styles.cardText)}>{content}</p>
+        <h3 {...stylex.props(styles.cardHeading)}>{title}</h3>
+        <p
+          {...stylex.props(
+            styles.cardText,
+            hovered && styles.textReveal,
+            globals.p
+          )}
+        >
+          {content}
+        </p>
       </div>
     </div>
   );

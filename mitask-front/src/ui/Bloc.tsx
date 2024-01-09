@@ -5,20 +5,16 @@ import { globals } from "@/ui/styles";
 
 interface Props {
   children: React.ReactNode;
-  bgGrey?: boolean;
   style?: StyleXStyles;
   small?: boolean;
+  id?: string;
 }
 
-const Bloc: React.FC<Props> = ({ children, bgGrey, small, style }: Props) => {
+const Bloc: React.FC<Props> = ({ children, small, style, id }: Props) => {
   return (
     <div
-      {...stylex.props(
-        globals.blocSection,
-        bgGrey && globals.background,
-        small && globals.small,
-        style
-      )}
+      {...stylex.props(globals.blocSection, small && globals.small, style)}
+      id={id}
     >
       {children}
     </div>

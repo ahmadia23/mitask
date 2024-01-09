@@ -64,6 +64,7 @@ export const globals = stylex.create({
 
   header: {
     color: colorVars.primary,
+    marginTop: 24,
     fontSize: fontVars.fontSizeXXLarge,
     width: {
       default: 700,

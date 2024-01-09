@@ -21,7 +21,7 @@ const styles = stylex.create({
 
 const CallToActionSection: React.FC = () => {
   return (
-    <Bloc bgGrey>
+    <Bloc style={globals.background} id="start_section">
       <div
         {...stylex.props(styles.centerBloc, globals.spacingBetweenUIElement)}
       >

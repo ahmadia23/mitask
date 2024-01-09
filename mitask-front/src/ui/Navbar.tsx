@@ -2,27 +2,30 @@
 import React, { useEffect, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import { Link } from "react-scroll";
-import { fontVars } from "./styles";
+import { fontVars, globals } from "./styles";
 
 const DARK = "@media (prefers-color-scheme: dark)";
 
 const styles = stylex.create({
   navbar: {
     height: 80,
+    color: "white",
     // Slightly higher navbar
-    position: "sticky",
+    position: "fixed",
     top: 0,
+    backgroundColor: {
+      default: "#161616",
+      [DARK]: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
+    },
+
     display: "flex",
     justifyContent: "space-between",
-    zIndex: 20,
     alignItems: "center",
     paddingInline: 32,
     width: "100%",
-    backgroundColor: {
-      default: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
-      [DARK]: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
-    },
+    zIndex: 100,
   },
+
   navbarScrolled: {
     opacity: 0.9, // Reduced opacity when scrolled
     zIndex: 100, // Higher z-index to be above other content
@@ -42,24 +45,40 @@ const styles = stylex.create({
   // Add styles for links if needed
 });
 
-const Navbar = () => {
-  const [isScrolling, setIsScrolling] = useState(false);
+const Navbar: React.FC = () => {
+  const [scrolling, setScrolling] = useState({
+    lastValue: 0,
+    status: false,
+  });
 
-  let lastScrollY = window.scrollY;
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(window.scrollY !== lastScrollY);
+    let lastScrollY: number;
+
+    if (typeof window !== undefined) {
       lastScrollY = window.scrollY;
-      setTimeout(() => setIsScrolling(false), 1500); // Delay to reset scrolling state
+    }
+
+    const handleScroll = () => {
+      setScrolling({
+        ...scrolling,
+        status:
+          window.scrollY > 200 && Math.abs(window.scrollY - lastScrollY) > 5,
+      });
+      lastScrollY = window.scrollY;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [window.scrollY]);
+  }, []);
 
   return (
-    <nav {...stylex.props(styles.navbar, isScrolling && styles.navbarScrolled)}>
+    <nav
+      {...stylex.props(
+        styles.navbar,
+        scrolling.status && styles.navbarScrolled
+      )}
+    >
       <div>
         <img src="/logo.png" alt="Logo" style={{ width: "100px" }} />
       </div>
@@ -110,7 +129,7 @@ const Navbar = () => {
         </Link>
         <Link
           activeClass="active"
-          to="section3"
+          to="start_section"
           spy={true}
           smooth={true}
           offset={-70}
@@ -119,7 +138,6 @@ const Navbar = () => {
         >
           Commencer
         </Link>
-        {/* Add more links as needed */}
       </div>
     </nav>
   );
