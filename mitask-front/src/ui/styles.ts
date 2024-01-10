@@ -66,6 +66,7 @@ export const globals = stylex.create({
     color: colorVars.primary,
     marginTop: 24,
     fontSize: fontVars.fontSizeXXLarge,
+
     width: {
       default: 700,
       [MOBILE]: "100%",

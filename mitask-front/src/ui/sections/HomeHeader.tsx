@@ -23,6 +23,7 @@ const styles = stylex.create({
   homeText: {
     paddingHorizontal: 16,
     flex: 1,
+    gap: 32,
   },
   homeSubText: {
     fontSize: 24,
@@ -52,7 +53,7 @@ const HomeHeader: React.FC = () => {
       <button
         onClick={() =>
           window.scrollTo({
-            top: 1000,
+            top: 600,
             left: 0,
             behavior: "smooth",
           })
