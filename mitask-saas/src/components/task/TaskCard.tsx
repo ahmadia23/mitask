@@ -1,19 +1,33 @@
+"use client";
+import Link from "next/link";
 import React from "react";
+
+const statusValues: {
+  "En cours": "text-yellow-400";
+  "Non démarré": "text-red-400";
+  Terminé: "text-green-400";
+} = {
+  "En cours": "text-yellow-400",
+  "Non démarré": "text-red-400",
+  Terminé: "text-green-400",
+};
 
 export interface TaskCardProps {
   id?: string;
   title: string;
-  description: string;
-  status: "En cours" | "Non démarré" | "Terminé";
+  description?: string;
+  status: keyof typeof statusValues;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ title, description, status }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ id, title, status }) => {
   return (
-    <div className="border border-gray-300 rounded shadow p-4 mb-4 bg-white overflow-hidden w-64 h-64">
+    <Link
+      href={`tasks/${id}`}
+      className="flex flex-col justify-between text-card-foreground p-4 mb-4 w-52 h-40 bg-card text-card-foreground "
+    >
       <h5 className="font-bold">{title}</h5>
-      <p>{description}</p>
-      <span>{status}</span>
-    </div>
+      <span className={`${statusValues[status]}`}>{status}</span>
+    </Link>
   );
 };
 

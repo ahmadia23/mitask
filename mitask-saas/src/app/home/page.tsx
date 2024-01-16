@@ -1,10 +1,9 @@
 import TaskSection from "&/components/task/TaskSection";
-import React from "react";
 
 export const Page = () => {
   return (
-    <div className="">
-      <h1>Tâches du moment</h1>
+    <div className="flex flex-col gap-8">
+      <h1 className="mt-8 text-lg font-bold">Tâches du moment</h1>
       <TaskSection />
     </div>
   );

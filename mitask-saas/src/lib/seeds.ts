@@ -1,4 +1,6 @@
-const taskSeedData = [
+import { Task } from "../../types/tasks";
+
+export const taskSeedData: Task[] = [
   {
     id: "1",
     title: "Finaliser le rapport de projet",
@@ -34,7 +36,30 @@ const taskSeedData = [
       "Examiner et ajuster les prévisions budgétaires pour le prochain trimestre.",
     status: "En cours",
   },
-  // Ajoutez d'autres tâches au besoin
 ];
 
-export default taskSeedData;
+export const projectSeedData = [
+  {
+    projectId: "proj-1",
+    title: "Développement de Produit",
+    description:
+      "Projet axé sur le développement et l'amélioration du produit principal.",
+    tasks: [taskSeedData[0], taskSeedData[1]],
+    image: "/marrakech.jpg",
+  },
+  {
+    projectId: "proj-2",
+    title: "Campagne Marketing",
+    description:
+      "Préparation et exécution de la prochaine grande campagne marketing.",
+    tasks: [taskSeedData[2], taskSeedData[3]],
+    image: "/tokyo.jpg",
+  },
+];
+
+export const fetchTask = (id: string, tasks: Task[]) => {
+  setTimeout(() => {
+    console.log("hello");
+  }, 10000);
+  return tasks.find((task: Task) => task.id === id);
+};

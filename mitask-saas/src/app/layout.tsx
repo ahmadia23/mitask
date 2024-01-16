@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import "./globals.css";
-
-const openSans = Open_Sans({ subsets: ["latin"] });
+import "&/styles/globals.css";
+import SideNav from "&/components/SideNav";
+import { Pathname } from "./pathname";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,12 +10,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: any;
 }) {
+  console.log(params);
+
   return (
     <html lang="en">
-      <body className={openSans.className}>{children}</body>
+      <Pathname>
+        <SideNav />
+        {children}
+      </Pathname>
     </html>
   );
 }
