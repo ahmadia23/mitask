@@ -1,3 +1,4 @@
+import { unstable_noStore } from "next/cache";
 import { Task } from "../../types/tasks";
 
 export const taskSeedData: Task[] = [
@@ -58,6 +59,7 @@ export const projectSeedData = [
 ];
 
 export const fetchTask = (id: string, tasks: Task[]) => {
+  unstable_noStore();
   setTimeout(() => {
     console.log("hello");
   }, 10000);

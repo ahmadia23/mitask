@@ -23,7 +23,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ id, title, status }) => {
   return (
     <Link
       href={`tasks/${id}`}
-      className="flex flex-col justify-between text-card-foreground p-4 mb-4 w-52 h-40 bg-card text-card-foreground "
+      className="flex flex-col justify-between p-4 mb-4 w-52 h-40 bg-card border border-border shadow-md hover:ring ring-ring"
     >
       <h5 className="font-bold">{title}</h5>
       <span className={`${statusValues[status]}`}>{status}</span>

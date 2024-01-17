@@ -4,7 +4,7 @@ import TaskCard from "./TaskCard";
 
 const TaskSection = () => {
   return (
-    <div className="container flex items-center gap-4 flex-wrap bg-background text-foreground border-border rounded-radius">
+    <div className="container flex items-center gap-4 flex-wrap">
       {taskSeedData.map((task) => (
         <TaskCard
           key={task.id}
