@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "&/styles/globals.css";
-import SideNav from "&/components/SideNav";
 import { Pathname } from "./pathname";
+import Navigation from "&/components/SideNavBar";
+import { Header } from "&/components/layout/Header";
+import SideNavBar from "&/components/SideNavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,12 +17,18 @@ export default function RootLayout({
   children: React.ReactNode;
   params: any;
 }) {
-  console.log(params);
-
   return (
     <html lang="en">
       <Pathname>
-        <SideNav />
+        <Header />
+        <div
+          id="blurryscroll"
+          aria-hidden="true"
+          className="fixed top-0 left-0 w-full h-16 overflow-hidden filter blur-sm"
+        >
+          {/* Duplicate of the content to be blurred */}
+        </div>
+        <SideNavBar />
         {children}
       </Pathname>
     </html>

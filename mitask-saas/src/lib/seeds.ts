@@ -60,8 +60,6 @@ export const projectSeedData = [
 
 export const fetchTask = (id: string, tasks: Task[]) => {
   unstable_noStore();
-  setTimeout(() => {
-    console.log("hello");
-  }, 10000);
+  setTimeout(() => {}, 10000);
   return tasks.find((task: Task) => task.id === id);
 };

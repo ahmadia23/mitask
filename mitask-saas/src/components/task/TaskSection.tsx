@@ -1,19 +1,23 @@
 import React from "react";
-import { taskSeedData } from "../../lib/seeds";
+import { projectSeedData, taskSeedData } from "../../lib/seeds";
 import TaskCard from "./TaskCard";
+import { Project } from "../../../types/tasks";
 
 const TaskSection = () => {
   return (
-    <div className="container flex items-center gap-4 flex-wrap">
-      {taskSeedData.map((task) => (
-        <TaskCard
-          key={task.id}
-          id={task.id}
-          title={task.title}
-          description={task.description}
-          status={task.status as "Non démarré" | "En cours" | "Terminé"}
-        />
-      ))}
+    <div className="container flex items-center  gap-4 flex-wrap h-full overflow-scroll-y">
+      {taskSeedData.map((task) => {
+        const project = projectSeedData.find((proj) =>
+          proj.tasks.find((projTask) => projTask === task)
+        ) as Project;
+
+        return (
+          <TaskCard
+            task={task}
+            project={{ image: project?.image, projectName: project?.title }}
+          ></TaskCard>
+        );
+      })}
     </div>
   );
 };

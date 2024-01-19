@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      spacing: {
+        viewSize: "calc(100% - 16rem)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

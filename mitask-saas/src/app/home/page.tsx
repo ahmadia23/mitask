@@ -1,12 +1,7 @@
-import TaskSection from "&/components/task/TaskSection";
+import HomeDashboard from "&/components/ui/test";
 
 export const Page = () => {
-  return (
-    <div className="flex flex-col gap-8">
-      <h1 className="mt-8 text-lg font-bold">Tâches du moment</h1>
-      <TaskSection />
-    </div>
-  );
+  return <HomeDashboard />;
 };
 
 export default Page;
