@@ -1,27 +1,45 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Package2Icon, SearchIcon } from "../ui/test";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
+  const pathname = usePathname();
   return (
-    <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6 fixed w-full z-20">
-      <nav className="flex-col hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+    <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6 fixed w-full z-20 bg-white">
+      <nav className="flex-col invisible h-full gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 md:visible ">
         <Link
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-          href="#"
+          className="flex visible items-center h-full gap-2 text-lg font-semibold md:text-base"
+          href="/home"
         >
-          <Package2Icon className="w-6 h-6" />
+          <Package2Icon className="w-6 h-full" />
           <span className="sr-only">Acme Inc</span>
         </Link>
-        <Link className="font-bold" href="#">
-          Tasks
+        <Link
+          className={`${pathname === "/tasks" ? "font-bold" : "text-gray-500"}`}
+          href="/tasks"
+        >
+          Tâches
         </Link>
-        <Link className="text-gray-500 dark:text-gray-400" href="#">
-          Calendar
+        <Link
+          className="text-gray-200 dark:text-gray-400 pointer-events-none w-32"
+          href="#"
+        >
+          Calendrier(À venir)
         </Link>
-        <Link className="text-gray-500 dark:text-gray-400" href="#">
-          Settings
+        <Link
+          className={`${
+            pathname === "/resources" ? "font-bold" : "text-gray-500"
+          }`}
+          href="/resources"
+        >
+          Ressources
+        </Link>
+        <Link className="text-gray-500 dark:text-gray-400" href="/settings">
+          Paramètres
         </Link>
       </nav>
 

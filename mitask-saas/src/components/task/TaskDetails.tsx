@@ -2,11 +2,10 @@
  * v0 by Vercel.
  * @see https://v0.dev/t/hU4wdoSDMjK
  */
-import { Label } from "@radix-ui/react-label";
-import { Button } from "./button";
-import { Input } from "./input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
-import { Textarea } from "./textarea";
+import { Textarea } from "../ui/textarea";
 import {
   Select,
   SelectContent,
@@ -15,22 +14,18 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "./select";
-import { Checkbox } from "@radix-ui/react-checkbox";
-
-interface ITaskCard {
-  id?: string;
-  title: string;
-  description?: string;
-  status: string;
-}
+} from "../ui/select";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
+import { Task } from "../../../types/tasks";
 
 interface TaskDetailsProps {
-  task: ITaskCard;
+  task: Task;
 }
 
 const TaskDetails: React.FC<TaskDetailsProps> = ({ task }) => {
-  const { title, description, status } = task;
+  const { title, description, status, deadline } = task;
+  console.log(status);
 
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 w-full">
@@ -52,21 +47,25 @@ const TaskDetails: React.FC<TaskDetailsProps> = ({ task }) => {
             <Label htmlFor="status">Status</Label>
             <Select value={status}>
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Choisir le statut" />
+                <SelectValue placeholder="Choisir le statut"></SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Status</SelectLabel>
-                  <SelectItem value="todo">To Do</SelectItem>
-                  <SelectItem value="inprogress">In Progress</SelectItem>
-                  <SelectItem value="done">Done</SelectItem>
+                  <SelectItem value="En cours">En cours</SelectItem>
+                  <SelectItem value="Terminé">Terminé</SelectItem>
+                  <SelectItem value="Non Démarré">Non Démarré</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-1">
             <Label htmlFor="deadline">Deadline</Label>
-            <Input id="deadline" type="date" />
+            <Input
+              id="deadline"
+              type="date"
+              onChange={(e) => console.log(e.target.value)}
+              value={deadline}
+            />
           </div>
           <div className="space-y-1">
             <Label htmlFor="checklist">Checklist</Label>

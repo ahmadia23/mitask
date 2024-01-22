@@ -4,7 +4,7 @@ import { fetchTask, projectSeedData, taskSeedData } from "../../../lib/seeds";
 import Image from "next/image";
 import React from "react";
 import { Task } from "../../../../types/tasks";
-import TaskDetails from "&/components/ui/taskdetails";
+import TaskDetails from "&/components/task/TaskDetails";
 
 export default function Page({ params }: { params: { id: string } }) {
   const task = fetchTask(params.id, taskSeedData) as Task;
@@ -18,7 +18,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   console.log(task);
   return (
-    <div className="flex flex-col items-center w-full h-screen overflow-y-scroll pt-16 gap-8">
+    <div className="flex flex-col items-center w-full h-screen  pt-16 gap-8">
       <Image
         className="w-full h-72 object-cover overlow-hidden"
         src={project.image}

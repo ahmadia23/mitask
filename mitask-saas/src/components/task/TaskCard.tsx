@@ -41,7 +41,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
   const { image, projectName } = project;
 
   return (
-    <Link href={`tasks/${id}`} className="w-full">
+    <Link href={`tasks/${id}`} className="w-full md:w-96">
       <Card>
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="text-lg font-medium">{title}</CardTitle>

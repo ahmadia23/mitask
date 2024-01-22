@@ -3,6 +3,7 @@ export type Task = {
   title: string;
   description: string;
   status: string;
+  deadline: string;
 };
 
 export interface Project {

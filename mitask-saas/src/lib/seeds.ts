@@ -8,6 +8,7 @@ export const taskSeedData: Task[] = [
     description:
       "Compléter et réviser le rapport final du projet avant la réunion de vendredi.",
     status: "En cours",
+    deadline: "2024-01-28",
   },
   {
     id: "2",
@@ -15,6 +16,7 @@ export const taskSeedData: Task[] = [
     description:
       "Discuter des prochaines étapes du développement du produit avec l'équipe technique.",
     status: "Non démarré",
+    deadline: "2024-01-24",
   },
   {
     id: "3",
@@ -22,6 +24,7 @@ export const taskSeedData: Task[] = [
     description:
       "Mettre à jour la page d'accueil avec les dernières statistiques de vente.",
     status: "Terminé",
+    deadline: "2024-01-19",
   },
   {
     id: "4",
@@ -29,6 +32,7 @@ export const taskSeedData: Task[] = [
     description:
       "Créer un plan détaillé pour la prochaine campagne de marketing digital.",
     status: "Non démarré",
+    deadline: "2024-01-19",
   },
   {
     id: "5",
@@ -36,6 +40,7 @@ export const taskSeedData: Task[] = [
     description:
       "Examiner et ajuster les prévisions budgétaires pour le prochain trimestre.",
     status: "En cours",
+    deadline: "2024-01-19",
   },
 ];
 

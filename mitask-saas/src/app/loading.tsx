@@ -3,11 +3,21 @@ import React from "react";
 
 export default function loading() {
   return (
-    <div className="flex items-center space-x-4">
-      <Skeleton className="h-12 w-12 rounded-full" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
+    <div className="container flex flex-col gap-16 items-center">
+      <div className="flex flex-col gap-8 pt-20 w-full">
+        <Skeleton className="w-11/12 h-[20px] rounded-full "></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
+      </div>
+      <div className="flex flex-col gap-8 w-full">
+        <Skeleton className="w-11/12 h-[20px] rounded-full "></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
+      </div>
+      <div className="flex flex-col gap-8 w-full">
+        <Skeleton className="w-11/12 h-[20px] rounded-full "></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
+        <Skeleton className="w-11/12 h-[20px] rounded-full"></Skeleton>
       </div>
     </div>
   );

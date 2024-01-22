@@ -1,7 +1,11 @@
+import Settings from "&/components/sttings";
+
 export const Page = () => {
   return (
-    <div className="flex flex-col gap-8">
-      <h1 className="mt-8 text-lg font-bold">Settings</h1>
+    <div className="container flex flex-col gap-8 w-full pt-14">
+      <h1 className="mt-8 text-2xl font-bold">Settings</h1>
+
+      <Settings />
     </div>
   );
 };
