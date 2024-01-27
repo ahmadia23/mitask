@@ -4,7 +4,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  RelationId,
+  ManyToOne,
 } from "typeorm";
 
 import { Project } from "./Project";
@@ -34,8 +35,12 @@ export class Task {
   })
   status?: TaskStatus;
 
-  @OneToMany(() => Project, (project) => project.tasks)
+  @ManyToOne(() => Project, (project) => project.tasks)
   project?: Project;
+
+  @Column("project_id")
+  @RelationId((task: Task) => task.project)
+  projectId?: number;
 
   @CreateDateColumn()
   createdAt?: Date;

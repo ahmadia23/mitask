@@ -9,21 +9,17 @@ import {
   CardDescription,
 } from "../ui/Cards";
 
-const statusValues: {
-  "En cours": "text-yellow-400";
-  "Non démarré": "text-red-400";
-  Terminé: "text-green-400";
-} = {
-  "En cours": "text-yellow-400",
-  "Non démarré": "text-red-400",
-  Terminé: "text-green-400",
+const statusMapper = {
+  in_progress: "En cours",
+  open: "Non démarré",
+  done: "Terminé",
 };
 
 interface ITaskCard {
   id?: string;
   title: string;
   description?: string;
-  status: string;
+  status: "in_progress" | "done" | "open";
 }
 
 interface TaskProjectProps {
@@ -51,7 +47,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
         </CardHeader>
         <CardContent>
           <div className="text-xs text-gray-500 dark:text-gray-400">
-            {status}
+            {statusMapper[status]}
           </div>
           <CardDescription className="mt-4 text-sm text-gray-600 dark:text-gray-300">
             {description}
