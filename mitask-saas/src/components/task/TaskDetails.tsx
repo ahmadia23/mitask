@@ -1,96 +1,33 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/hU4wdoSDMjK
- */
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-
-import { Textarea } from "../ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
-import { Task } from "../../../types/tasks";
+import React from "react";
+import TaskDetailsForm from "./TaskDetailsForm";
+import Image from "next/image";
+import { getProjects, getTask } from "&/lib/actions";
+import { Project, Task } from "../../../types/tasks";
 
 interface TaskDetailsProps {
-  task: Task;
+  id: string;
 }
 
-const TaskDetails: React.FC<TaskDetailsProps> = ({ task }) => {
-  const { title, description, status, deadline } = task;
-  console.log(status);
+export const TaskDetails: React.FC<TaskDetailsProps> = async (props) => {
+  const { id } = props;
 
+  const task: Task = await getTask(id);
+  const projects: Project[] = await getProjects();
+  const project = projects.find(
+    (proj: Project) => proj.id === task.projectId
+  ) as Project;
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 w-full">
-      <div className="border shadow-sm rounded-lg">
-        <form className="space-y-4 p-4">
-          <div className="space-y-1">
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" placeholder="Task Title" value={title} />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              placeholder="Task Description"
-              value={description}
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="status">Status</Label>
-            <Select value={status}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Choisir le statut"></SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="En cours">En cours</SelectItem>
-                  <SelectItem value="Terminé">Terminé</SelectItem>
-                  <SelectItem value="Non Démarré">Non Démarré</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="deadline">Deadline</Label>
-            <Input
-              id="deadline"
-              type="date"
-              onChange={(e) => console.log(e.target.value)}
-              value={deadline}
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="checklist">Checklist</Label>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item1" />
-                <Label htmlFor="item1">Item 1</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item2" />
-                <Label htmlFor="item2">Item 2</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item3" />
-                <Label htmlFor="item3">Item 3</Label>
-              </div>
-            </div>
-          </div>
-          <Button className="w-full sm:w-40" type="submit">
-            Save Changes
-          </Button>
-        </form>
-      </div>
-    </main>
+    <div className="flex flex-col items-center w-full h-screen  pt-16 gap-8">
+      <Image
+        className="w-full h-72 object-cover overlow-hidden"
+        src={project.image}
+        alt={project.title}
+        width={800}
+        height={800}
+      ></Image>
+      <h1 className="text-3xl text-foreground">{task.title}</h1>
+      <TaskDetailsForm task={task} />
+      {/* <TaskDescription task></TaskDescription> */}
+    </div>
   );
 };
-
-export default TaskDetails;

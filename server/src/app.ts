@@ -1,27 +1,30 @@
 import express, { Express } from "express";
 
 import cors from "cors";
-import { TaskApi } from "./api/api";
+import { ProjectApi, TaskApi } from "./api/api";
 import { AppDataSource } from "./config/db";
 
 class App {
   public app: Express;
   private readonly port: number;
-  private api: TaskApi;
+  private taskApi: TaskApi;
+  private projectApi: ProjectApi;
 
   constructor(
     port: number = process.env.PORT ? parseInt(process.env.PORT) : 5000
   ) {
     this.app = express();
     this.port = port;
-    this.api = new TaskApi();
+    this.taskApi = new TaskApi();
+    this.projectApi = new ProjectApi();
     this.initializeMiddlewares();
   }
 
   private initializeMiddlewares(): void {
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(this.api.router);
+    this.app.use(this.taskApi.router);
+    this.app.use(this.projectApi.router);
     // Add other global middlewares here
   }
 

@@ -40,7 +40,7 @@ export class Task {
 
   @Column("project_id")
   @RelationId((task: Task) => task.project)
-  projectId?: number;
+  projectId?: string;
 
   @CreateDateColumn()
   createdAt?: Date;

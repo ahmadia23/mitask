@@ -1,8 +1,7 @@
 import React from "react";
-import { projectSeedData, taskSeedData } from "../../lib/seeds";
 import TaskCard from "./TaskCard";
 import { Project, Task } from "../../../types/tasks";
-import { getTasks } from "&/lib/actions";
+import { getProjects, getTasks } from "&/lib/actions";
 
 interface TaskSectionProps {
   status?: string;
@@ -10,7 +9,7 @@ interface TaskSectionProps {
 
 const TaskSection: React.FC<TaskSectionProps> = async ({ status }) => {
   const tasks = (await getTasks()) as Task[];
-  console.log(tasks);
+  const projects = (await getProjects()) as Project[];
 
   return (
     <>
@@ -19,14 +18,14 @@ const TaskSection: React.FC<TaskSectionProps> = async ({ status }) => {
         {tasks
           .filter((task) => task.status === status || task)
           .map((task) => {
-            const project = projectSeedData.find((proj) =>
-              proj.tasks.find((projTask) => projTask === task)
+            const project = projects.find(
+              (proj) => task.projectId === proj.id
             ) as Project;
 
             return (
               <TaskCard
                 task={task}
-                project={{ image: project?.image, projectName: project?.title }}
+                project={{ image: project.image, projectName: project.title }}
               ></TaskCard>
             );
           })}

@@ -11,4 +11,7 @@ export class TaskService {
   async getTasks(userId: string): Promise<Task[] | void> {
     return await this.taskRepository.findTasksByUser(userId);
   }
+  async getTask(taskId: string): Promise<Task | void> {
+    return await this.taskRepository.findTaskById(taskId);
+  }
 }

@@ -16,7 +16,7 @@ const statusMapper = {
 };
 
 interface ITaskCard {
-  id?: string;
+  task_id?: string;
   title: string;
   description?: string;
   status: "in_progress" | "done" | "open";
@@ -33,11 +33,11 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
-  const { id, title, description, status } = task;
+  const { task_id, title, description, status } = task;
   const { image, projectName } = project;
 
   return (
-    <Link href={`tasks/${id}`} className="w-full md:w-96">
+    <Link href={`tasks/${task_id}`} className="w-full md:w-96">
       <Card>
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="text-lg font-medium">{title}</CardTitle>

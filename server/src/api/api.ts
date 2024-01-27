@@ -28,6 +28,7 @@ export class TaskApi {
 
   private initializeRoutes() {
     this.router.get("/api/tasks", this.taskController.getTasks);
+    this.router.get("/api/tasks/:id", this.taskController.getTask);
   }
 }
 

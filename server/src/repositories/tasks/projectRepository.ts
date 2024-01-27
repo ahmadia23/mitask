@@ -7,7 +7,6 @@ export class ProjectRepository {
       const tasks: Project[] = await AppDataSource.getRepository(
         Project
       ).find();
-      console.log(tasks);
 
       if (tasks) {
         return tasks;

@@ -1,15 +1,25 @@
-export type Task = {
-  id: string;
+export interface Task {
+  task_id: string;
   title: string;
   description: string;
-  status: "in_progress" | "open" | "done";
-  deadline: string;
-};
+  deadline?: Date | string;
+  status: TaskStatus;
+  projectId?: Project["id"];
+  project?: Project;
+}
+
+export enum TaskStatus {
+  OPEN = "open",
+  IN_PROGRESS = "in_progress",
+  DONE = "done",
+}
 
 export interface Project {
-  projectId: string;
+  id: string;
   title: string;
-  description: string;
-  tasks: Task[];
+  description?: string;
+  deadline: Date | string; // Use Date for JavaScript Date object or string for ISO date string
+  status: TaskStatus;
   image: string;
+  tasks?: Task[];
 }

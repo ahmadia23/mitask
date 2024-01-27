@@ -18,4 +18,15 @@ export class TaskController {
       next(error);
     }
   };
+
+  public getTask = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const taskId = req.params.id;
+      const tasks = await this.tasksService.getTask(taskId);
+
+      res.status(200).json({ data: tasks, message: "findAll" });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
