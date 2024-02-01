@@ -114,10 +114,7 @@ const TaskDetailsForm = () => {
               <Checkbox id="item1" />
               <Label htmlFor="item1">Item 1</Label>
             </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="item2" />
-              <Label htmlFor="item2">Item 2</Label>
-            </div>
+
             <div className="flex items-center space-x-2">
               <Checkbox id="item3" />
               <Label htmlFor="item3">Item 3</Label>
