@@ -86,7 +86,7 @@ const SideNavBar: React.FC = () => {
                 En retard
               </NavItem>
             </div>
-            <Link href={"/tasks/new/project"} className="self-center">
+            <Link href={"/tasks/new"} className="self-center">
               <Button>Créer une tâche</Button>
             </Link>
           </div>

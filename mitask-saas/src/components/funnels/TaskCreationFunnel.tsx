@@ -6,7 +6,7 @@ import { TaskCreationProjectStep } from "./TaskCreationProjectStep";
 import { TaskCreationTaskStep } from "./TaskCreationTaskStep";
 
 const taskCreationFunnel: Funnel[] = [
-  { path: "/tasks/new/project", order: 1, name: "Project" },
+  { path: "/tasks/new", order: 1, name: "Project" },
   { path: "/tasks/new/task", order: 2, name: "Task" },
 ];
 
