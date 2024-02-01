@@ -2,47 +2,69 @@
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-import { Textarea } from "../ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { createATask } from "&/lib/actions";
-import { Form, useForm } from "react-hook-form";
 import { z } from "zod";
-import { TaskStatus } from "../../../types/tasks";
+import { Task, TaskStatus } from "../../../types/tasks";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  Form,
 } from "../ui/form";
 import { useTaskCreationStore } from "&/zustand/taskCreationStore";
+import { useForm } from "react-hook-form";
+import { Textarea } from "../ui/textarea";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+} from "&/components/ui/select";
+import { useEffect, useMemo, useState } from "react";
+import { DatePicker } from "../ui/datePicker";
+
+interface TaskDetailsFormProps {
+  existingTask?: Pick<Task, "title" | "description" | "deadline" | "status">;
+  handleCreateTaskSubmit: any;
+}
 
 export const TaskCreationSchema = z.object({
   title: z.string().max(255),
   description: z.string(),
   deadline: z.date(),
-  status: z.nativeEnum(TaskStatus),
-  projectId: z.string().uuid(),
+  status: z.enum(["open", "in_progress", "done"]),
 });
 
-const TaskDetailsForm = () => {
+const TaskDetailsForm: React.FC<TaskDetailsFormProps> = ({
+  existingTask,
+  handleCreateTaskSubmit,
+}) => {
   const form = useForm<z.infer<typeof TaskCreationSchema>>();
+  const [date, setDate] = useState<Date>(new Date());
   const { task, taskUpdate } = useTaskCreationStore();
+
+  const taskIsValid = useMemo(
+    () => TaskCreationSchema.safeParse(task).success,
+    [task]
+  );
+
+  useEffect(() => {
+    console.log(task);
+  }, [task]);
 
   return (
     <Form {...form}>
       <form
-        className={`flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 w-[700px] mx-auto`}
-        onSubmit={form.handleSubmit(() => createATask(task))}
+        className={`flex flex-1 flex-col gap-2 p-4 md:gap-8 md:p-6 w-[700px] mx-auto`}
+        onSubmit={form.handleSubmit(
+          handleCreateTaskSubmit.bind(null, task, taskIsValid)
+        )}
       >
         <FormField
           control={form.control}
@@ -89,7 +111,9 @@ const TaskDetailsForm = () => {
               <FormControl>
                 <Select
                   name="status"
-                  onValueChange={(value) => console.log(value)}
+                  onValueChange={(value: TaskStatus) =>
+                    taskUpdate({ status: value })
+                  }
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="En cours"></SelectValue>
@@ -106,8 +130,27 @@ const TaskDetailsForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="deadline"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Deadline</FormLabel>
+              <FormControl>
+                <DatePicker
+                  date={date}
+                  setDate={(value) => {
+                    setDate(value);
+                    taskUpdate({ deadline: value });
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <div className="space-y-1">
+        {/* <div className="space-y-1">
           <Label htmlFor="checklist">Checklist</Label>
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
@@ -120,11 +163,16 @@ const TaskDetailsForm = () => {
               <Label htmlFor="item3">Item 3</Label>
             </div>
           </div>
-        </div>
-        <Button className="w-full sm:w-40" type="submit">
+        </div> */}
+        <Button
+          className="w-full sm:w-40"
+          type="submit"
+          disabled={!taskIsValid}
+        >
           Save Changes
         </Button>
       </form>
+      <div className="border border-bottom w-10/12 mx-auto mt-8"></div>
     </Form>
   );
 };

@@ -124,9 +124,7 @@ export const NewProjectForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Deadline</FormLabel>
-              <FormControl>
-                <DatePicker />
-              </FormControl>
+              <FormControl>{/* <DatePicker /> */}</FormControl>
               <FormMessage />
             </FormItem>
           )}

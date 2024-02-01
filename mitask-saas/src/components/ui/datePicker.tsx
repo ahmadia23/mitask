@@ -9,9 +9,12 @@ import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 
-export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
+interface DatePickerProps {
+  date: Date;
+  setDate: (value: any) => void;
+}
 
+export const DatePicker: React.FC<DatePickerProps> = ({ date, setDate }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -36,4 +39,4 @@ export function DatePicker() {
       </PopoverContent>
     </Popover>
   );
-}
+};

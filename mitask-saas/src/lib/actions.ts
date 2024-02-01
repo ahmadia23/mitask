@@ -1,6 +1,8 @@
 "use server";
 
 import { TaskCreationSchema } from "&/components/task/TaskDetailsForm";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { Task } from "../../types/tasks";
 
 export const getTasks = async () => {
@@ -49,7 +51,6 @@ export const getProjects = async () => {
 
 export async function createATask(task: Task) {
   try {
-    TaskCreationSchema.parse(task);
     const result = await fetch("http://localhost:5001/api/tasks", {
       method: "POST",
       headers: {
@@ -61,7 +62,10 @@ export async function createATask(task: Task) {
     console.log(result.status);
     const response = await result.json();
 
-    return response.data;
+    console.log(response);
+
+    revalidatePath("/tasks");
+    redirect("/tasks");
   } catch (error) {
     console.error(error);
   }

@@ -13,7 +13,6 @@ export const useTaskCreationStore = create<TaskCreationStore>()((set) => ({
     projectId: "",
     deadline: "",
     status: undefined,
-    image: "",
   },
   taskUpdate: (taskUpdate: { [P in keyof Task]: Task[P] }) => {
     set((state: any) => ({ task: { ...state.task, ...taskUpdate } }));
