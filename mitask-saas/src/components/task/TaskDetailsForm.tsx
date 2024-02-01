@@ -13,79 +13,122 @@ import {
 } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
-import { Task } from "../../../types/tasks";
+import { createATask } from "&/lib/actions";
+import { Form, useForm } from "react-hook-form";
+import { z } from "zod";
+import { TaskStatus } from "../../../types/tasks";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { useTaskCreationStore } from "&/zustand/taskCreationStore";
 
-interface TaskDetailsProps {
-  task: Task;
-}
+export const TaskCreationSchema = z.object({
+  title: z.string().max(255),
+  description: z.string(),
+  deadline: z.date(),
+  status: z.nativeEnum(TaskStatus),
+  projectId: z.string().uuid(),
+});
 
-const TaskDetailsForm: React.FC<TaskDetailsProps> = ({ task }) => {
-  const { title, description, status, deadline } = task;
-  console.log(status);
+const TaskDetailsForm = () => {
+  const form = useForm<z.infer<typeof TaskCreationSchema>>();
+  const { task, taskUpdate } = useTaskCreationStore();
 
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 w-full">
-      <div className="border shadow-sm rounded-lg">
-        <form className="space-y-4 p-4">
-          <div className="space-y-1">
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" placeholder="Task Title" value={title} />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              placeholder="Task Description"
-              value={description}
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="status">Status</Label>
-            <Select value={status}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Choisir le statut"></SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="En cours">En cours</SelectItem>
-                  <SelectItem value="Terminé">Terminé</SelectItem>
-                  <SelectItem value="Non Démarré">Non Démarré</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="deadline">Deadline</Label>
-            <Input
-              id="deadline"
-              type="date"
-              onChange={(e) => console.log(e.target.value)}
-              value={deadline?.toString()}
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="checklist">Checklist</Label>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item1" />
-                <Label htmlFor="item1">Item 1</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item2" />
-                <Label htmlFor="item2">Item 2</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="item3" />
-                <Label htmlFor="item3">Item 3</Label>
-              </div>
+    <Form {...form}>
+      <form
+        className={`flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 w-[700px] mx-auto`}
+        onSubmit={form.handleSubmit(() => createATask(task))}
+      >
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Titre</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Finir les review de PR"
+                  {...field}
+                  onChange={(e) => taskUpdate({ title: e.target.value })}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Lire toutes les pulls requests et faire des commentaires..."
+                  {...field}
+                  onChange={(e) => taskUpdate({ description: e.target.value })}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Status</FormLabel>
+              <FormControl>
+                <Select
+                  name="status"
+                  onValueChange={(value) => console.log(value)}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="En cours"></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="in_progress">En cours</SelectItem>
+                      <SelectItem value="open">Non Démarré</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="space-y-1">
+          <Label htmlFor="checklist">Checklist</Label>
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2">
+              <Checkbox id="item1" />
+              <Label htmlFor="item1">Item 1</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="item2" />
+              <Label htmlFor="item2">Item 2</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="item3" />
+              <Label htmlFor="item3">Item 3</Label>
             </div>
           </div>
-          <Button className="w-full sm:w-40" type="submit">
-            Save Changes
-          </Button>
-        </form>
-      </div>
-    </main>
+        </div>
+        <Button className="w-full sm:w-40" type="submit">
+          Save Changes
+        </Button>
+      </form>
+    </Form>
   );
 };
 

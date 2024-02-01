@@ -14,4 +14,7 @@ export class TaskService {
   async getTask(taskId: string): Promise<Task | void> {
     return await this.taskRepository.findTaskById(taskId);
   }
+  async createTask(task: Task): Promise<Task | void> {
+    return await this.taskRepository.createTask(task);
+  }
 }

@@ -7,10 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 
 export type pathname = ["/", "/resources", "/settings", "/home", "/tasks"];
 
-export const sidebarVisibility = [
-  "/",
-  "/resources",
-  "/settings",
-  "/home",
-  "/tasks",
-];
+export const showSidebar = (isMobile: boolean, currentPath: string) => {
+  if (isMobile) {
+    return true;
+  }
+
+  return currentPath === "/tasks";
+};
+
+export const funnelPages = ["/tasks/new"];

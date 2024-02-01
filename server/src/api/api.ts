@@ -28,7 +28,12 @@ export class TaskApi {
 
   private initializeRoutes() {
     this.router.get("/api/tasks", this.taskController.getTasks);
+    this.router.get(
+      "/api/tasks?:title&:description",
+      this.taskController.getTasksByParamsQuery
+    );
     this.router.get("/api/tasks/:id", this.taskController.getTask);
+    this.router.post("/api/tasks", this.taskController.createTask);
   }
 }
 

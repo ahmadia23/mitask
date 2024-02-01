@@ -1,12 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faBook,
-  faBurger,
   faCog,
   faHome,
   faTasks,
@@ -15,7 +11,9 @@ import useDeviceType from "&/hooks/useDeviceType";
 import { useClickAway } from "@uidotdev/usehooks";
 import { usePathname } from "next/navigation";
 import NavItem from "./NavItem";
-import { sidebarVisibility } from "&/lib/utils";
+import { showSidebar } from "&/lib/utils";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const SideNavBar: React.FC = () => {
   const isMobile = useDeviceType();
@@ -30,21 +28,19 @@ const SideNavBar: React.FC = () => {
   });
 
   useEffect(() => {
-    if (!isMobile) {
-      setSidebarIsVisible(true);
-    } else {
-      setSidebarIsVisible(false);
-    }
-  }, [isMobile]);
+    setSidebarIsVisible(showSidebar(isMobile, pathname));
+  }, [isMobile, pathname]);
 
   return (
-    isMobile && (
-      <div className="flex flex-col z-10">
-        {sidebarIsVisible ? (
-          <nav
-            className="flex flex-col items-center w-64 bg-background py-32 shadow justify-around h-screen"
-            ref={ref}
-          >
+    <div className="flex flex-col z-10">
+      {sidebarIsVisible && (
+        <nav
+          className={`flex flex-col items-center w-64 bg-background py-32 shadow h-screen ${
+            isMobile && "justify-around"
+          }`}
+          ref={ref}
+        >
+          {isMobile && (
             <div className="w-full">
               <h1 className="text-lg font-bold mb-8 ml-8">Gérer mes tâches</h1>
               <NavItem
@@ -76,8 +72,9 @@ const SideNavBar: React.FC = () => {
                 Paramètres
               </NavItem>
             </div>
-
-            <div className="w-full">
+          )}
+          <div className="w-full flex flex-col gap-8">
+            <div>
               <h1 className="text-lg font-bold mb-8 ml-8">Filtres</h1>
               <NavItem href="/#" isActive={false}>
                 À finir aujourd'hui
@@ -89,19 +86,13 @@ const SideNavBar: React.FC = () => {
                 En retard
               </NavItem>
             </div>
-          </nav>
-        ) : (
-          <button onClick={() => setSidebarIsVisible(true)} className="p-3">
-            <FontAwesomeIcon
-              icon={faBurger}
-              fixedWidth={true}
-              width={10}
-              className="text-black"
-            />
-          </button>
-        )}
-      </div>
-    )
+            <Link href={"/tasks/new/project"} className="self-center">
+              <Button>Créer une tâche</Button>
+            </Link>
+          </div>
+        </nav>
+      )}
+    </div>
   );
 };
 

@@ -1,9 +1,9 @@
 export interface Task {
-  task_id: string;
-  title: string;
-  description: string;
+  task_id?: string;
+  title?: string;
+  description?: string;
   deadline?: Date | string;
-  status: TaskStatus;
+  status?: TaskStatus;
   projectId?: Project["id"];
   project?: Project;
 }

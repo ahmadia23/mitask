@@ -1,7 +1,7 @@
 import React from "react";
 import TaskCard from "./TaskCard";
 import { Project, Task } from "../../../types/tasks";
-import { getProjects, getTasks } from "&/lib/actions";
+import { getProjects, getTasks, getTasksByParams } from "&/lib/actions";
 
 interface TaskSectionProps {
   status?: string;
@@ -9,6 +9,7 @@ interface TaskSectionProps {
 
 const TaskSection: React.FC<TaskSectionProps> = async ({ status }) => {
   const tasks = (await getTasks()) as Task[];
+
   const projects = (await getProjects()) as Project[];
 
   return (
@@ -16,7 +17,7 @@ const TaskSection: React.FC<TaskSectionProps> = async ({ status }) => {
       <h1 className="text-lg font-bold">{status} </h1>
       <div className="flex flex-wrap items-center gap-4 h-full overflow-scroll-y md:flex">
         {tasks
-          .filter((task) => task.status === status || task)
+          .filter((task) => (status ? task.status === status : task))
           .map((task) => {
             const project = projects.find(
               (proj) => task.projectId === proj.id

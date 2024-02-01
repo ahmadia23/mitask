@@ -31,4 +31,16 @@ export class TaskRepository {
       console.error(error);
     }
   }
+
+  public async createTask(task: Task): Promise<Task | void> {
+    try {
+      await AppDataSource.createQueryBuilder()
+        .insert()
+        .into(Task)
+        .values(task)
+        .execute();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

@@ -17,9 +17,9 @@ const statusMapper = {
 
 interface ITaskCard {
   task_id?: string;
-  title: string;
+  title?: string;
   description?: string;
-  status: "in_progress" | "done" | "open";
+  status?: "in_progress" | "done" | "open";
 }
 
 interface TaskProjectProps {
@@ -47,7 +47,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
         </CardHeader>
         <CardContent>
           <div className="text-xs text-gray-500 dark:text-gray-400">
-            {statusMapper[status]}
+            {status && statusMapper[status]}
           </div>
           <CardDescription className="mt-4 text-sm text-gray-600 dark:text-gray-300">
             {description}
