@@ -25,8 +25,6 @@ export class TaskRepository {
       if (task) {
         return task;
       }
-
-      return undefined;
     } catch (error) {
       console.error(error);
     }

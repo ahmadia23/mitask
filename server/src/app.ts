@@ -25,7 +25,6 @@ class App {
     this.app.use(express.json());
     this.app.use(this.taskApi.router);
     this.app.use(this.projectApi.router);
-    // Add other global middlewares here
   }
 
   private async initializeDatabase(): Promise<void> {
