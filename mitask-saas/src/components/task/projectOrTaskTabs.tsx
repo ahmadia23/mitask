@@ -20,7 +20,7 @@ export const ProjectOrTaskTabs: React.FC = () => {
   return (
     <Tabs
       defaultValue="old_project"
-      className="w-full flex flex-col gap-8 pl-8 pt-8"
+      className="w-full flex flex-col gap-8 pt-8"
     >
       <div className="flex justify-between w-full">
         <TabsList className="w-fit">
@@ -35,7 +35,7 @@ export const ProjectOrTaskTabs: React.FC = () => {
           Suivant
         </Button>
       </div>
-      <TabsContent value="old_project">
+      <TabsContent value="old_project" className="w-full">
         <ProjectList />
       </TabsContent>
       <TabsContent value="new_project">

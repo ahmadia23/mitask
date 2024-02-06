@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   return (
     <Card
-      className={`w-[335px] flex flex-col gap-4 hover:cursor-pointer hover:scale-95 transition-transform ease-in ${
+      className={`w-[340px] flex flex-col mt-8 gap-4 hover:cursor-pointer hover:scale-95 transition-transform ease-in ${
         isActive ? "bg-gray-300" : ""
       }`}
       onClick={handleProjectCardClick}

@@ -14,7 +14,7 @@ export const ProjectList = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-4 w-full">
+    <div className="flex flex-wrap justify-around w-full">
       {projects &&
         projects.map((project: Project) => {
           return <ProjectCard key={project.id} {...project}></ProjectCard>;

@@ -1,30 +1,27 @@
 import express, { Express } from "express";
 
 import cors from "cors";
-import { ProjectApi, TaskApi } from "./api/api";
 import { AppDataSource } from "./config/db";
+import { Api } from "./api/api";
 
 class App {
   public app: Express;
   private readonly port: number;
-  private taskApi: TaskApi;
-  private projectApi: ProjectApi;
+  private api: Api;
 
   constructor(
     port: number = process.env.PORT ? parseInt(process.env.PORT) : 5000
   ) {
     this.app = express();
     this.port = port;
-    this.taskApi = new TaskApi();
-    this.projectApi = new ProjectApi();
+    this.api = new Api();
     this.initializeMiddlewares();
   }
 
   private initializeMiddlewares(): void {
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(this.taskApi.router);
-    this.app.use(this.projectApi.router);
+    this.app.use(this.api.router);
   }
 
   private async initializeDatabase(): Promise<void> {

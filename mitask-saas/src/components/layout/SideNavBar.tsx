@@ -32,7 +32,7 @@ const SideNavBar: React.FC = () => {
   }, [isMobile, pathname]);
 
   return (
-    <div className="flex flex-col z-10">
+    <div className="flex flex-col top-10">
       {sidebarIsVisible && (
         <nav
           className={`flex flex-col items-center w-64 bg-background py-32 shadow h-screen ${

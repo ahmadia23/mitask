@@ -1,4 +1,5 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import { jwt } from "jsonwebtoken";
 
 import { Router } from "express-serve-static-core";
 import { TaskController } from "../controllers/taskController";
@@ -7,6 +8,9 @@ import { TaskService } from "../services/TaskService";
 import { ProjectRepository } from "../repositories/tasks/projectRepository";
 import { ProjectService } from "../services/ProjectService";
 import { ProjectController } from "../controllers/projectController";
+import { UserRepository } from "../repositories/users/userRepository";
+import { UserService } from "../services/UserService";
+import { UserController } from "../controllers/userController";
 
 const taskRepository = new TaskRepository();
 const taskService = new TaskService(taskRepository);
@@ -16,13 +20,21 @@ const projectRepository = new ProjectRepository();
 const projectService = new ProjectService(projectRepository);
 const projectController = new ProjectController(projectService);
 
-export class TaskApi {
+const userRepository = new UserRepository();
+const userService = new UserService(userRepository);
+const userController = new UserController(userService);
+
+export class Api {
   router: Router;
   taskController: TaskController;
+  project: ProjectController;
+  userController: UserController;
 
   constructor() {
     this.router = express.Router();
     this.taskController = taskController;
+    this.userController = userController;
+    this.project = projectController;
     this.initializeRoutes();
   }
 
@@ -34,20 +46,33 @@ export class TaskApi {
     );
     this.router.get("/api/tasks/:id", this.taskController.getTask);
     this.router.post("/api/tasks", this.taskController.createTask);
-  }
-}
 
-export class ProjectApi {
-  router: Router;
-  project: ProjectController;
+    this.router.get("/api/signup", this.userController.signup);
 
-  constructor() {
-    this.router = express.Router();
-    this.project = projectController;
-    this.initializeRoutes();
-  }
-
-  private initializeRoutes() {
     this.router.get("/api/projects", this.project.getProjects);
   }
+  // const isAuth = async (req: Request, res: Response, next: NextFunction) => {
+  //   try {
+  //     const token = "getTokenFromHeaders(req);"
+
+  //     jwt.verify(token, process.env.SECRET_KEY, async (err: any, decoded: any) => {
+  //       if (err) {
+  //         // Using standard Express response methods for UNAUTHORIZED error
+  //         return res.status(401).json({ error: "Unauthorized access." });
+  //       }
+
+  //       const user = a.;
+
+  //       if (!user) {
+  //         // Using standard Express response methods for USER NOT FOUND error
+  //         return res.status(404).json({ error: "User not found." });
+  //       }
+
+  //       req.user = user;
+  //       next();
+  //     });
+  //   } catch (error: Error) {
+  //     // Using standard Express response methods for generic error handling
+  //     return res.status(403).json({ error: error.message });
+  //   }
 }

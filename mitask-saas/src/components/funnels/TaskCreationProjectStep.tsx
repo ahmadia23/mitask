@@ -4,7 +4,7 @@ import { ProjectOrTaskTabs } from "../task/projectOrTaskTabs";
 
 export const TaskCreationProjectStep = () => {
   return (
-    <div className="container flex flex-col w-full">
+    <div className="container flex flex-col">
       <ProjectOrTaskTabs />
     </div>
   );
