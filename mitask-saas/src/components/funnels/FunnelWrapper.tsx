@@ -1,6 +1,6 @@
 import React from "react";
-import BreadCrumbs from "../ui/breadCrumbs";
 import { Funnel, useFunnel } from "&/hooks/useFunnel";
+import BreadCrumbs from "./BreadCrumbs";
 
 interface FunnelWrapperProps {
   children?: React.ReactNode;

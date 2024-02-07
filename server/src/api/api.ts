@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { jwt } from "jsonwebtoken";
+// import { jwt } from "jsonwebtoken";
 
 import { Router } from "express-serve-static-core";
 import { TaskController } from "../controllers/taskController";
@@ -50,7 +50,9 @@ export class Api {
     this.router.get("/api/signup", this.userController.signup);
 
     this.router.get("/api/projects", this.project.getProjects);
+    this.router.post("/api/projects", this.project.addProject);
   }
+
   // const isAuth = async (req: Request, res: Response, next: NextFunction) => {
   //   try {
   //     const token = "getTokenFromHeaders(req);"

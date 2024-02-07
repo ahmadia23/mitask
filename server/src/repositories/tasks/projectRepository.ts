@@ -17,4 +17,16 @@ export class ProjectRepository {
       console.error(error);
     }
   }
+
+  public async createProject(project: Project): Promise<Project["id"] | void> {
+    try {
+      await AppDataSource.createQueryBuilder()
+        .insert()
+        .into(Project)
+        .values(project)
+        .execute();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

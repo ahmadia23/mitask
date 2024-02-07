@@ -7,7 +7,7 @@ export function Pathname({ children }: { children: React.ReactNode }) {
   const patnames = pathname.split("/");
 
   return (
-    <body className={`flex ${patnames.length > 2 ? "" : "gap-8"} h-screen`}>
+    <body className={`flex ${patnames.length > 2 ? "" : "gap-8"} h-full`}>
       {children}
     </body>
   );

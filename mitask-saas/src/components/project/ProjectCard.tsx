@@ -25,20 +25,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   return (
     <Card
-      className={`w-[340px] flex flex-col mt-8 gap-4 hover:cursor-pointer hover:scale-95 transition-transform ease-in ${
+      className={`w-[290px] flex flex-col mt-8 gap-2 hover:cursor-pointer hover:scale-95 transition-transform ease-in rounded overflow-hidden h-[310px] ${
         isActive ? "bg-gray-300" : ""
       }`}
       onClick={handleProjectCardClick}
     >
-      <img
-        alt={title}
-        className="w-full h-36 object-cover overflow-hidden"
-        src={image}
-      />
+      <img alt={title} className="w-full h-36 object-cover " src={image} />
 
-      <div className="flex flex-col p-4 gap-8">
+      <div className="flex flex-col p-4 ">
         <h1 className="font-bold text-center">{title}</h1>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription className="p-2">{description}</CardDescription>
       </div>
     </Card>
   );

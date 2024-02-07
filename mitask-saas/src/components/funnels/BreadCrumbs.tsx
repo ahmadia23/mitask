@@ -10,7 +10,7 @@ export default function BreadCrumbs(props: BreadCrumbsProps) {
   const { steps, currentStep } = props;
 
   return (
-    <div className="flex items-center justify-center space-x-4 px-6 w-full">
+    <div className="flex items-center justify-center space-x-4 p-6 mt-4 w-full">
       {steps.map((step: Funnel) => {
         return (
           <>

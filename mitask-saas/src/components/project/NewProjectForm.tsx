@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { TaskStatus } from "../../../types/tasks";
+import { Project, TaskStatus } from "../../../types/tasks";
 import { Textarea } from "../ui/textarea";
 import {
   Select,
@@ -25,6 +25,12 @@ import {
   SelectValue,
 } from "../ui/select";
 import { DatePicker } from "../ui/datePicker";
+import { createProject } from "&/lib/actions";
+
+interface NewProjectFormProps {
+  onCancel: () => void;
+  onProjectCreate: (id: Project["id"]) => void;
+}
 
 const ProjectSchema = z.object({
   title: z.string().max(255),
@@ -34,7 +40,9 @@ const ProjectSchema = z.object({
   image: z.string().max(255).url().optional(),
 });
 
-export const NewProjectForm = () => {
+export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
+  const { onCancel, onProjectCreate } = props;
+  const [date, setDate] = useState<Date>(new Date());
   const form = useForm<z.infer<typeof ProjectSchema>>({
     defaultValues: {
       title: "",
@@ -42,16 +50,23 @@ export const NewProjectForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof ProjectSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const project = {
+      title: values.title,
+      description: values.description,
+      image: values.image,
+      status: values.status || ("open" as TaskStatus),
+      deadline: date,
+    };
+
+    const { id } = createProject(project);
+    onProjectCreate(id);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[460px] space-y-3 border p-8 rounded-xl"
+        className="w-[450px] space-y-3 border p-4 rounded-xl m-8"
       >
         <FormField
           control={form.control}
@@ -95,41 +110,52 @@ export const NewProjectForm = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Status</FormLabel>
-              <FormControl>
-                <Select name="status">
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="En cours"></SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="in_progress">En cours</SelectItem>
-                      <SelectItem value="open">Non Démarré</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="deadline"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Deadline</FormLabel>
-              <FormControl>{/* <DatePicker /> */}</FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+        <div className="flex w-full gap-8">
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Status</FormLabel>
+                <FormControl>
+                  <Select {...field}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="En cours"></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="in_progress">En cours</SelectItem>
+                        <SelectItem value="open">Non Démarré</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="deadline"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Deadline</FormLabel>
+                <FormControl>
+                  <DatePicker date={date} setDate={setDate} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex gap-2">
+          <Button className="w-full" type="submit">
+            Valider
+          </Button>
+          <Button className="w-full" variant="ghost" onClick={onCancel}>
+            Annuler
+          </Button>
+        </div>
       </form>
     </Form>
   );
