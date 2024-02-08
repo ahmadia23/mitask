@@ -70,7 +70,8 @@ export async function createATask(task: Task) {
     console.error(error);
   }
 }
-export async function createProject(project: Project) {
+
+export async function createProject(project: Project): Promise<Project | void> {
   try {
     const result = await fetch("http://localhost:5001/api/projects", {
       method: "POST",
@@ -80,10 +81,12 @@ export async function createProject(project: Project) {
       mode: "cors", // no-cors, *cors, same-origin
       body: JSON.stringify(project),
     });
-    const response = await result.json();
-    console.log(response);
-    revalidatePath("/tasks/new");
-    return response;
+    if (!result.ok) {
+      throw new Error("Network response was not ok.");
+    }
+    const data: Project = await result.json();
+    revalidatePath("/tasks/new"); // Ensure this function is defined or imported
+    return data;
   } catch (error) {
     console.error(error);
   }

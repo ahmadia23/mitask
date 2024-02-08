@@ -13,7 +13,7 @@ export const TaskCreationProjectStep = () => {
         href={task.projectId ? "/tasks/new/task" : ""}
         className="w-40 self-end"
       >
-        <Button className="w-full" disabled>
+        <Button className="w-full" disabled={Boolean(!task.projectId)}>
           Suivant
         </Button>
       </Link>

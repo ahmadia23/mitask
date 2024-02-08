@@ -58,8 +58,10 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
       deadline: date,
     };
 
-    const { id } = createProject(project);
-    onProjectCreate(id);
+    const projectCreated = createProject(project);
+    if (projectCreated) {
+      onProjectCreate(projectCreated.id);
+    }
   }
 
   return (
