@@ -49,7 +49,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof ProjectSchema>) {
+  async function onSubmit(values: z.infer<typeof ProjectSchema>) {
     const project = {
       title: values.title,
       description: values.description,
@@ -58,7 +58,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
       deadline: date,
     };
 
-    const projectCreated = createProject(project);
+    const projectCreated = await createProject(project);
     if (projectCreated) {
       onProjectCreate(projectCreated.id);
     }
