@@ -6,13 +6,13 @@ import { Project } from "../../../types/tasks";
 import { NewProjectForm } from "./NewProjectForm";
 import { AddProjectSkeleton } from "./AddProjectSkeleton";
 import { useTaskCreationStore } from "&/zustand/taskCreationStore";
-
-interface ProjectListProps {}
+import { usePathname } from "next/navigation";
 
 export const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>();
   const [projectFormIsOpen, setProjectFormIsOpen] = useState<boolean>(false);
   const { task, taskUpdate } = useTaskCreationStore();
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -22,7 +22,9 @@ export const ProjectList: React.FC = () => {
   }, []);
 
   const handleNewProjectSubmit = (id: Project["id"]) => {
-    taskUpdate({ projectId: id });
+    if (pathname === "/tasks/new") {
+      taskUpdate({ projectId: id });
+    }
     setProjectFormIsOpen(false);
   };
 

@@ -59,6 +59,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
     };
 
     const projectCreated = await createProject(project);
+
     if (projectCreated) {
       onProjectCreate(projectCreated.id);
     }

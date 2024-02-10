@@ -9,14 +9,17 @@ export const TaskCreationProjectStep = () => {
 
   return (
     <div className="container flex flex-col w-full">
-      <Link
-        href={task.projectId ? "/tasks/new/task" : ""}
-        className="w-40 self-end"
-      >
-        <Button className="w-full" disabled={Boolean(!task.projectId)}>
-          Suivant
-        </Button>
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href={"/tasks"}>retour</Link>
+        <Link
+          href={task.projectId ? "/tasks/new/task" : ""}
+          className="w-40 self-end"
+        >
+          <Button className="w-full" disabled={Boolean(!task.projectId)}>
+            Suivant
+          </Button>
+        </Link>
+      </div>
       <ProjectList />
     </div>
   );
