@@ -12,6 +12,9 @@ export class ProjectService {
   async getTasks(userId: string): Promise<Task[] | void> {
     return await this.projectRepository.findProjectsByUser(userId);
   }
+  async getProject(projectId: string): Promise<Project | void> {
+    return await this.projectRepository.findProjectById(projectId);
+  }
 
   async createProject(project: Project): Promise<Project["id"] | void> {
     return await this.projectRepository.createProject(project);

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { createATask } from "&/lib/actions";
 import { Task } from "../../../types/tasks";
+import { redirect } from "next/navigation";
 
 export const handleCreateTaskSubmit = async (
   task: Pick<Task, "title" | "description" | "deadline" | "status">,
@@ -13,6 +14,7 @@ export const handleCreateTaskSubmit = async (
   if (isTaskValid) {
     await createATask(task);
     console.log("success");
+    redirect("/tasks");
   } else {
     console.log("an error has occured", isTaskValid);
   }
@@ -20,7 +22,7 @@ export const handleCreateTaskSubmit = async (
 
 export const TaskCreationTaskStep = () => {
   return (
-    <div className="container flex flex-col gap-4 w-full pt-8 justify-center">
+    <div className="container flex flex-col gap-4 w-full justify-center">
       <Link href={"/tasks/new"}>
         <div className="flex gap-2 items-center">
           <FontAwesomeIcon icon={faLongArrowAltLeft}></FontAwesomeIcon>

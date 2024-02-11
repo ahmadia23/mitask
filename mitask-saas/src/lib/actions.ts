@@ -84,7 +84,7 @@ export async function createProject(project: Project): Promise<Project | void> {
     if (!result.ok) {
       throw new Error("Network response was not ok.");
     }
-    const data: Project = await result.json();
+    const { data } = await result.json();
     revalidatePath("/tasks/new"); // Ensure this function is defined or imported
     return data;
   } catch (error) {

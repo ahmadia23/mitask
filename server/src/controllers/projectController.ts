@@ -23,6 +23,21 @@ export class ProjectController {
     }
   };
 
+  public getProjectById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const projectId = req.params.project_id;
+      const projects = await this.projectService.getProject(projectId);
+
+      res.status(200).json({ data: projects, message: "findAll" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public addProject = async (
     req: Request,
     res: Response,

@@ -29,7 +29,7 @@ import { createProject } from "&/lib/actions";
 
 interface NewProjectFormProps {
   onCancel: () => void;
-  onProjectCreate: (id: Project["id"]) => void;
+  onProjectCreate: (id: string) => void;
 }
 
 const ProjectSchema = z.object({
@@ -61,7 +61,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
     const projectCreated = await createProject(project);
 
     if (projectCreated) {
-      onProjectCreate(projectCreated.id);
+      onProjectCreate(projectCreated.id as string);
     }
   }
 

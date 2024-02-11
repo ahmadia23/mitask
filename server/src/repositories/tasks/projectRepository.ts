@@ -17,6 +17,23 @@ export class ProjectRepository {
       console.error(error);
     }
   }
+  public async findProjectById(id: any): Promise<Project | void> {
+    try {
+      const project = await AppDataSource.getRepository(Project).findOneOrFail({
+        where: {
+          id: id,
+        },
+      });
+
+      console.log(project);
+
+      if (project) {
+        return project;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   public async createProject(project: Project): Promise<Project["id"] | void> {
     try {
