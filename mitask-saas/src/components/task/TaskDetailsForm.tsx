@@ -28,10 +28,10 @@ import {
 } from "&/components/ui/select";
 import { useEffect, useMemo, useState } from "react";
 import { DatePicker } from "../ui/datePicker";
+import { redirect, useRouter } from "next/navigation";
 
 interface TaskDetailsFormProps {
   existingTask?: Pick<Task, "title" | "description" | "deadline" | "status">;
-  handleCreateTaskSubmit: any;
 }
 
 export const TaskCreationSchema = z.object({
@@ -41,13 +41,23 @@ export const TaskCreationSchema = z.object({
   status: z.enum(["open", "in_progress", "done"]),
 });
 
-const TaskDetailsForm: React.FC<TaskDetailsFormProps> = ({
-  existingTask,
-  handleCreateTaskSubmit,
-}) => {
+const TaskDetailsForm: React.FC<TaskDetailsFormProps> = ({ existingTask }) => {
   const form = useForm<z.infer<typeof TaskCreationSchema>>();
   const [date, setDate] = useState<Date>(new Date());
   const { task, taskUpdate } = useTaskCreationStore();
+  const router = useRouter();
+
+  const handleCreateTaskSubmit = async (
+    task: Pick<Task, "title" | "description" | "deadline" | "status">,
+    isTaskValid: boolean
+  ) => {
+    if (isTaskValid) {
+      await createATask(task);
+      router.push("/tasks");
+    } else {
+      console.log("an error has occured", isTaskValid);
+    }
+  };
 
   const taskIsValid = useMemo(
     () => TaskCreationSchema.safeParse(task).success,

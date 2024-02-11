@@ -61,9 +61,11 @@ export const Header = () => {
               />
             </div>
           </form>
-          <Button>
-            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-          </Button>
+          <Link href={"/tasks/new"} className="self-center">
+            <Button>
+              <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+            </Button>
+          </Link>
           <Button className="rounded-full" size="icon" variant="ghost">
             <img
               alt="Avatar"

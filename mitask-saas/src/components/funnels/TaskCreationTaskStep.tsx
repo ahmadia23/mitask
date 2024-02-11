@@ -7,19 +7,6 @@ import { createATask } from "&/lib/actions";
 import { Task } from "../../../types/tasks";
 import { redirect } from "next/navigation";
 
-export const handleCreateTaskSubmit = async (
-  task: Pick<Task, "title" | "description" | "deadline" | "status">,
-  isTaskValid: boolean
-) => {
-  if (isTaskValid) {
-    await createATask(task);
-    console.log("success");
-    redirect("/tasks");
-  } else {
-    console.log("an error has occured", isTaskValid);
-  }
-};
-
 export const TaskCreationTaskStep = () => {
   return (
     <div className="container flex flex-col gap-4 w-full justify-center">
@@ -30,9 +17,7 @@ export const TaskCreationTaskStep = () => {
         </div>
       </Link>
       <h1 className="text-2xl text-center"> Nouvelle tâche</h1>
-      <TaskDetailsForm
-        handleCreateTaskSubmit={handleCreateTaskSubmit}
-      ></TaskDetailsForm>
+      <TaskDetailsForm></TaskDetailsForm>
     </div>
   );
 };
