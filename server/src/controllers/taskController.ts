@@ -11,7 +11,6 @@ export class TaskController {
   public getTasks = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = "1";
-      console.log(req.query);
       const tasks = await this.tasksService.getTasks(userId);
 
       res.status(200).json({ data: tasks, message: "findAll" });
@@ -54,10 +53,24 @@ export class TaskController {
   ) => {
     try {
       const task = req.body;
-      console.log("body is hey", req.body);
       await this.tasksService.createTask(task);
 
       res.status(200).json({ data: task, message: "findAll" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public removeTask = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const taskId = req.params.id;
+      await this.tasksService.deleteTask(taskId);
+
+      res.status(200).json({ data: taskId, message: "remove task" });
     } catch (error) {
       next(error);
     }

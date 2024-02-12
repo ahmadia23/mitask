@@ -45,6 +45,7 @@ export class Api {
       this.taskController.getTasksByParamsQuery
     );
     this.router.get("/api/tasks/:id", this.taskController.getTask);
+    this.router.delete("/api/tasks/:id", this.taskController.removeTask);
     this.router.post("/api/tasks", this.taskController.createTask);
 
     this.router.get("/api/signup", this.userController.signup);

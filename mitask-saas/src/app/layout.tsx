@@ -17,7 +17,7 @@ export default function RootLayout({
   params: any;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-gray-50">
       <Pathname>
         <Header />
         <SideNavBar />

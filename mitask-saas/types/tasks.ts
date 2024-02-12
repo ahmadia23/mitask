@@ -20,6 +20,6 @@ export interface Project {
   description?: string;
   deadline: Date | string; // Use Date for JavaScript Date object or string for ISO date string
   status: TaskStatus;
-  image?: string;
+  image: string;
   tasks?: Task[];
 }

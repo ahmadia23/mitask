@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     !funnelPages.includes(pathname) && (
-      <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6 fixed w-full z-20 bg-white">
+      <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6 fixed w-full z-20 bg-gray-100 border">
         <nav className="flex-col invisible h-full gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 md:visible ">
           <Link
             className="flex visible items-center h-full gap-2 text-lg font-semibold md:text-base"

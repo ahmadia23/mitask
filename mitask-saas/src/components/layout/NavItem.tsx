@@ -18,8 +18,8 @@ const NavItem: React.FC<NavItemProps> = ({
   return (
     <Link
       href={href}
-      className={`flex items-center p-2 mb-2 rounded w-full gap-2 pl-8 border-border bg-background text-foreground ${
-        isActive ? "bg-primary text-secondary" : "hover:bg-secondary"
+      className={`flex items-center p-2 mb-2  w-full gap-2 pl-8   text-foreground ${
+        isActive ? "bg-primary text-secondary" : "hover:bg-gray-300"
       }`}
     >
       {icon && <FontAwesomeIcon icon={icon} className="mr-3" />}

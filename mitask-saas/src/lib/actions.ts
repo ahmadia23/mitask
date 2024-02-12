@@ -70,6 +70,27 @@ export async function createATask(task: Task) {
     console.error(error);
   }
 }
+export async function deleteATask(taskId: Task["task_id"]) {
+  try {
+    const result = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors", // no-cors, *cors, same-origin
+    });
+
+    if (!result.ok) {
+      throw new Error("Network response was not ok.");
+    }
+
+    console.log(result.status);
+
+    revalidatePath("/tasks");
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export async function createProject(project: Project): Promise<Project | void> {
   try {

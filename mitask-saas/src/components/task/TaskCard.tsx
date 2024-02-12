@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -8,6 +8,10 @@ import {
   CardContent,
   CardDescription,
 } from "../ui/Cards";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { DeleteModal } from "../ui/DeleteModal";
+import { deleteATask } from "&/lib/actions";
 
 const statusMapper = {
   in_progress: "En cours",
@@ -37,8 +41,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
   const { image, projectName } = project;
 
   return (
-    <Link href={`tasks/${task_id}`} className="w-full md:w-96">
-      <Card>
+    <Card className="flex flex-col group hover:shadow-custom cursor-pointer">
+      <DeleteModal taskId={task_id}>
+        <FontAwesomeIcon
+          className="self-end p-4 text-2xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity hover:scale-125 duration-300"
+          icon={faXmark}
+        ></FontAwesomeIcon>
+      </DeleteModal>
+      <Link href={`tasks/${task_id}`} className="md:w-96">
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="text-lg font-medium">{title}</CardTitle>
           <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -74,8 +84,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
             </div>
           </div>
         </CardContent>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 };
 

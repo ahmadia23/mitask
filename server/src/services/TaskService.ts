@@ -17,4 +17,7 @@ export class TaskService {
   async createTask(task: Task): Promise<Task | void> {
     return await this.taskRepository.createTask(task);
   }
+  async deleteTask(taskId: Task["task_id"]): Promise<Task | void> {
+    return await this.taskRepository.deleteTask(taskId);
+  }
 }

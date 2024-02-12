@@ -41,4 +41,15 @@ export class TaskRepository {
       console.error(error);
     }
   }
+  public async deleteTask(taskId: Task["task_id"]): Promise<Task | void> {
+    try {
+      await AppDataSource.createQueryBuilder()
+        .delete()
+        .from(Task)
+        .where("task_id = :id", { id: taskId })
+        .execute();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
