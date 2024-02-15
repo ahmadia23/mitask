@@ -10,6 +10,10 @@ import { usePathname } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { GET_PROJECT, GET_PROJECTS } from "&/app/tasks/api/route";
 
+interface ProjectListProps {
+  inFunnelMode?: boolean;
+}
+
 export const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectFormIsOpen, setProjectFormIsOpen] = useState<boolean>(false);
@@ -37,7 +41,7 @@ export const ProjectList: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 w-full items-center">
+    <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4">
       {projects &&
         projects.map((project: Project) => {
           return <ProjectCard key={project.id} {...project}></ProjectCard>;

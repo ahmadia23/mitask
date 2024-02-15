@@ -52,7 +52,7 @@ export class Api {
 
     this.router.get("/api/projects", this.project.getProjects);
     this.router.post("/api/projects", this.project.addProject);
-    this.router.post("/api/projects/:project_id", this.project.getProjectById);
+    this.router.get("/api/projects/:project_id", this.project.getProjectById);
   }
 
   // const isAuth = async (req: Request, res: Response, next: NextFunction) => {

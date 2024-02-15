@@ -32,6 +32,14 @@ export const Header = () => {
             Tâches
           </Link>
           <Link
+            className={`${
+              pathname === "/projects" ? "font-bold" : "text-gray-500"
+            }`}
+            href="/projects"
+          >
+            Projets
+          </Link>
+          <Link
             className="text-gray-200 dark:text-gray-400 pointer-events-none w-32"
             href="#"
           >

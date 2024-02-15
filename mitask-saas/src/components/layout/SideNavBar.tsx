@@ -13,25 +13,27 @@ import { usePathname } from "next/navigation";
 import NavItem from "./NavItem";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { showSidebar } from "&/lib/utils";
 
 const SideNavBar: React.FC = () => {
   const isMobile = useDeviceType();
   const pathname = usePathname();
   const pathnames = pathname.split("/");
 
-  const [sidebarIsVisible, setSidebarIsVisible] = useState<boolean>(!isMobile);
+  const [sidebarIsVisible, setSidebarIsVisible] = useState<boolean>(false);
   const ref = useClickAway<HTMLDivElement>(() => {
     if (isMobile) {
       setSidebarIsVisible(!sidebarIsVisible);
     }
   });
 
+  console.log(showSidebar(pathname));
+
   return (
     <div
       className="top-10 z-10 group cursor-pointer fixed"
       onMouseOver={() => {
-        console.log("here");
-        setSidebarIsVisible(true);
+        setSidebarIsVisible(showSidebar(pathname));
       }}
       onMouseLeave={() => setSidebarIsVisible(false)}
     >

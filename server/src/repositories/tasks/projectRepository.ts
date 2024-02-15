@@ -25,8 +25,6 @@ export class ProjectRepository {
         },
       });
 
-      console.log(project);
-
       if (project) {
         return project;
       }

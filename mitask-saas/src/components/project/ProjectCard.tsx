@@ -3,29 +3,35 @@ import React, { useEffect, useState } from "react";
 import { Card, CardDescription } from "../ui/Cards";
 import { Project } from "../../../types/tasks";
 import { useTaskCreationStore } from "&/zustand/taskCreationStore";
+import { useRouter } from "next/navigation";
 
-interface ProjectCardProps extends Project {}
+interface ProjectCardProps extends Project {
+  inFunnelMode?: boolean;
+}
 
 export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
-  const { id, image, title, description } = props;
+  const { id, image, title, description, inFunnelMode } = props;
   const { task, taskUpdate } = useTaskCreationStore();
   const [isActive, setIsActive] = useState(task.projectId === id);
+  const router = useRouter();
 
   useEffect(() => {
     setIsActive(task.projectId === id);
   }, [task]);
 
   const handleProjectCardClick = () => {
-    if (!isActive) {
+    if (!isActive && inFunnelMode) {
       taskUpdate({ projectId: id });
-    } else {
+    } else if (isActive && inFunnelMode) {
       taskUpdate({ projectId: "" });
+    } else {
+      router.push(`/projects/${id}`);
     }
   };
 
   return (
     <Card
-      className={`w-[290px] flex flex-col mt-8 gap-2 hover:cursor-pointer hover:scale-95 transition-transform ease-in rounded overflow-hidden h-[310px] ${
+      className={`w-full flex flex-col mt-8 gap-2 hover:cursor-pointer hover:scale-95 transition-transform ease-in rounded overflow-hidden h-[310px] ${
         isActive ? "bg-gray-300" : ""
       }`}
       onClick={handleProjectCardClick}

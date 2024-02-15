@@ -38,6 +38,18 @@ export const getTask = async (id: string) => {
   }
 };
 
+export const getProject = async (id: string) => {
+  try {
+    console.log("tryning to fetch");
+    const result = await fetch(`http://localhost:5001/api/projects/${id}`);
+    const response = await result.json();
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getProjects = async () => {
   try {
     const result = await fetch("http://localhost:5001/api/projects");

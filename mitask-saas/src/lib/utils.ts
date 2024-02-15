@@ -5,14 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export type pathname = ["/", "/resources", "/settings", "/home", "/tasks"];
+export type pathname = ["/tasks"];
 
-export const showSidebar = (isMobile: boolean, currentPath: string) => {
-  if (isMobile) {
-    return true;
-  }
-
-  return currentPath === "/tasks";
+export const showSidebar = (currentPath: string) => {
+  return currentPath !== "/tasks/new";
 };
 
 export const funnelPages = ["/tasks/new"];

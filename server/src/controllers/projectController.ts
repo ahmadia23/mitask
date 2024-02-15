@@ -30,9 +30,9 @@ export class ProjectController {
   ) => {
     try {
       const projectId = req.params.project_id;
-      const projects = await this.projectService.getProject(projectId);
+      const project = await this.projectService.getProject(projectId);
 
-      res.status(200).json({ data: projects, message: "findAll" });
+      res.status(200).json({ data: project, message: "findAll" });
     } catch (error) {
       next(error);
     }
