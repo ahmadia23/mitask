@@ -7,7 +7,7 @@ export const Page = async ({ params }: { params: { id: string } }) => {
   const project = (await getProject(params.id)) as Project;
 
   return (
-    <div className="flex flex-col gap-16 w-full">
+    <div className="flex flex-col gap-8 w-full">
       <Image
         alt="Image"
         className="object-cover object-center border"

@@ -2,12 +2,11 @@ import { ProjectDetailsOverview } from "./ProjectDetailsOverview";
 import { ProjectCommentCard } from "./ProjectCommentCard";
 
 import { getProject } from "&/lib/actions";
-import { Project } from "next/dist/build/swc";
+import { Project } from "../../../types/tasks";
 
 interface ProjectDetailsProps extends Project {}
 
 export const ProjectDetails: React.FC<ProjectDetailsProps> = async (props) => {
-  console.log(props);
   return (
     <div className="flex flex-col gap-16 w-full py-8 px-16">
       <ProjectDetailsOverview {...props}></ProjectDetailsOverview>

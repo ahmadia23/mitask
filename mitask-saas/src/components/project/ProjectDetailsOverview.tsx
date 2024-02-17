@@ -3,7 +3,7 @@ import { Project } from "../../../types/tasks";
 
 interface ProjectDetailsOverviewProps {
   title: Project["title"];
-  description: Project["description"];
+  description?: Project["description"];
   deadline: Project["deadline"];
 }
 
@@ -23,12 +23,26 @@ export const ProjectDetailsOverview: React.FC<ProjectDetailsOverviewProps> = (
 
         <div className="grid gap-2 md:grid-cols-2">
           <div className="grid gap-1">
+            <div className="flex"></div>
             <div className="flex items-center gap-2">
               <CalendarIcon className="w-4 h-4" />
               <h3 className="text-lg font-bold">Deadline</h3>
             </div>
-            <p>{deadline.toString()}</p>
+            <p>
+              {new Intl.DateTimeFormat("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }).format(new Date(deadline))}
+            </p>
+
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="w-4 h-4" />
+              <h3 className="text-lg font-bold">Completed</h3>
+            </div>
+            <p></p>
           </div>
+
           <div className="grid gap-1">
             <div className="flex items-center gap-2">
               <UsersIcon className="w-4 h-4" />
@@ -76,26 +90,6 @@ export const ProjectDetailsOverview: React.FC<ProjectDetailsOverviewProps> = (
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-4">
-        <div className="flex flex-col items-center gap-1 text-center">
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Started
-          </span>
-          <span className="font-semibold">Oct 20, 2023</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Due
-          </span>
-          <span className="font-semibold">Nov 10, 2023</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Completed
-          </span>
-          <span className="font-semibold">50%</span>
         </div>
       </div>
     </div>
