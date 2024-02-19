@@ -3,9 +3,6 @@ import TaskDetailsForm from "../task/TaskDetailsForm";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import { createATask } from "&/lib/actions";
-import { Task } from "../../../types/tasks";
-import { redirect } from "next/navigation";
 
 export const TaskCreationTaskStep = () => {
   return (

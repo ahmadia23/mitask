@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { validFormData } from "../../types/tasks";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,3 +13,5 @@ export const showSidebar = (currentPath: string) => {
 };
 
 export const funnelPages = ["/tasks/new"];
+
+// export const validateFormData = (formData: validFormData, zodSchema: ) => {};

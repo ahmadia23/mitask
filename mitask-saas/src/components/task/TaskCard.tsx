@@ -10,7 +10,7 @@ import {
 } from "../ui/Cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { DeleteModal } from "../ui/DeleteModal";
+import { DeleteModal } from "./DeleteModal";
 import { TaskProjectInfo } from "../../../types/tasks";
 
 const statusMapper = {

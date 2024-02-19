@@ -12,7 +12,7 @@ export const TaskCreationProjectStep = () => {
   return (
     <div className="container flex flex-col w-full">
       <div className="flex items-center justify-between">
-        <Link href={"/tasks"} className="text-bold flex items-center gap-2">
+        <Link href="/tasks" className="text-bold flex items-center gap-2">
           <FontAwesomeIcon icon={faLongArrowLeft}></FontAwesomeIcon>
           <p className="text-bold text-xl">retour</p>
         </Link>

@@ -1,9 +1,10 @@
 "use server";
 
-import { TaskCreationSchema } from "&/components/task/TaskDetailsForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { Project, Task } from "../../types/tasks";
+import { ProjectSchema } from "&/schema/tasks";
+import { z } from "zod";
 
 export const getTasks = async () => {
   try {
@@ -38,7 +39,7 @@ export const getTask = async (id: string) => {
   }
 };
 
-export const getProject = async (id: string) => {
+export const getProject = async (id: Project["id"]) => {
   try {
     const result = await fetch(`http://localhost:5001/api/projects/${id}`);
     const response = await result.json();
@@ -81,6 +82,7 @@ export async function createATask(task: Task) {
     console.error(error);
   }
 }
+
 export async function deleteATask(taskId: Task["task_id"]) {
   try {
     const result = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
@@ -88,14 +90,12 @@ export async function deleteATask(taskId: Task["task_id"]) {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors", // no-cors, *cors, same-origin
+      mode: "cors",
     });
 
     if (!result.ok) {
       throw new Error("Network response was not ok.");
     }
-
-    console.log(result.status);
 
     revalidatePath("/tasks");
   } catch (error) {
@@ -103,21 +103,26 @@ export async function deleteATask(taskId: Task["task_id"]) {
   }
 }
 
-export async function createProject(project: Project): Promise<Project | void> {
+export async function createProject(
+  projectData: z.infer<typeof ProjectSchema>
+): Promise<Project | void> {
   try {
+    const project = ProjectSchema.parse(projectData);
+
     const result = await fetch("http://localhost:5001/api/projects", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors", // no-cors, *cors, same-origin
+      mode: "cors",
       body: JSON.stringify(project),
     });
+
     if (!result.ok) {
       throw new Error("Network response was not ok.");
     }
     const { data } = await result.json();
-    revalidatePath("/tasks/new"); // Ensure this function is defined or imported
+    revalidatePath("/tasks/new");
     return data;
   } catch (error) {
     console.error(error);

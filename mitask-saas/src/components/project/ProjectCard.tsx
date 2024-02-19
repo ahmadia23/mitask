@@ -20,10 +20,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   }, [task]);
 
   const handleProjectCardClick = () => {
+    console.log(inFunnelMode);
     if (!isActive && inFunnelMode) {
-      taskUpdate({ projectId: id });
+      taskUpdate({ ...task, projectId: id });
     } else if (isActive && inFunnelMode) {
-      taskUpdate({ projectId: "" });
+      taskUpdate({ ...task, projectId: "" });
     } else {
       router.push(`/projects/${id}`);
     }

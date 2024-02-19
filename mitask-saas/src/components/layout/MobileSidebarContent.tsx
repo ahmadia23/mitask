@@ -5,7 +5,7 @@ import {
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import NavItem from "./NavItem";
+import NavItem from "./SideNavigation/NavItem";
 import { usePathname } from "next/navigation";
 
 const MobileSidebarContent = () => {

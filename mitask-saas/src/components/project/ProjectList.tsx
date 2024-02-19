@@ -1,5 +1,5 @@
 "use client";
-import { getProjects } from "&/lib/actions";
+import { getProject, getProjects } from "&/lib/actions";
 import React, { useEffect, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import { Project } from "../../../types/tasks";
@@ -7,12 +7,7 @@ import { NewProjectForm } from "./NewProjectForm";
 import { AddProjectSkeleton } from "./AddProjectSkeleton";
 import { useTaskCreationStore } from "&/zustand/taskCreationStore";
 import { usePathname } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { GET_PROJECT, GET_PROJECTS } from "&/app/tasks/api/route";
-
-interface ProjectListProps {
-  inFunnelMode?: boolean;
-}
 
 export const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -27,14 +22,13 @@ export const ProjectList: React.FC = () => {
     fetchProjects();
   }, [GET_PROJECTS]);
 
-  const handleNewProjectSubmit = async (id: string) => {
-    console.log("new project created handling task update");
-    const newProject = await GET_PROJECT(id);
+  const handleNewProjectSubmit = async (id: Project["id"]) => {
+    const newProject = await getProject(id);
 
     setProjects([...projects, newProject]);
 
     if (pathname === "/tasks/new") {
-      taskUpdate({ projectId: id });
+      taskUpdate({ ...task, projectId: id });
     }
 
     setProjectFormIsOpen(false);
@@ -44,7 +38,13 @@ export const ProjectList: React.FC = () => {
     <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4">
       {projects &&
         projects.map((project: Project) => {
-          return <ProjectCard key={project.id} {...project}></ProjectCard>;
+          return (
+            <ProjectCard
+              key={project.id}
+              {...project}
+              inFunnelMode={pathname === "/tasks/new"}
+            ></ProjectCard>
+          );
         })}
       {!projectFormIsOpen ? (
         <AddProjectSkeleton

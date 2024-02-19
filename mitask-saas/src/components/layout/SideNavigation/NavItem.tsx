@@ -18,7 +18,7 @@ const NavItem: React.FC<NavItemProps> = ({
   return (
     <Link
       href={href}
-      className={`flex items-center p-2 mb-2  w-full gap-2 pl-8   text-foreground ${
+      className={`flex items-center p-2 w-full gap-2 pl-8  text-foreground text-sm ${
         isActive ? "bg-primary text-secondary" : "hover:bg-gray-300"
       }`}
     >

@@ -1,4 +1,4 @@
-import SideNavBar from "&/components/layout/SideNavBar";
+import SideNavBar from "&/components/layout/SideNavigation/SideBar";
 import TaskSection from "&/components/task/TaskSection";
 
 export const Page = () => {

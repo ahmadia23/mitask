@@ -2,8 +2,6 @@
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
 import { createATask } from "&/lib/actions";
 import { z } from "zod";
 import { Task, TaskStatus } from "../../../types/tasks";
@@ -29,17 +27,11 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { DatePicker } from "../ui/datePicker";
 import { redirect, useRouter } from "next/navigation";
+import { TaskCreationSchema } from "&/schema/tasks";
 
 interface TaskDetailsFormProps {
   existingTask?: Pick<Task, "title" | "description" | "deadline" | "status">;
 }
-
-export const TaskCreationSchema = z.object({
-  title: z.string().max(255),
-  description: z.string(),
-  deadline: z.date(),
-  status: z.enum(["open", "in_progress", "done"]),
-});
 
 const TaskDetailsForm: React.FC<TaskDetailsFormProps> = ({ existingTask }) => {
   const form = useForm<z.infer<typeof TaskCreationSchema>>();

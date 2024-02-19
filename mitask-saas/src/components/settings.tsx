@@ -1,9 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/oHuhXwd2cVq
- */
-import Link from "next/link";
-
 import {
   Card,
   CardContent,

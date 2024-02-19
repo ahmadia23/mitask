@@ -1,3 +1,6 @@
+import { ProjectSchema, TaskCreationSchema } from "&/schema/tasks";
+import { z } from "zod";
+
 export interface Task {
   task_id?: string;
   title?: string;
@@ -15,10 +18,10 @@ export enum TaskStatus {
 }
 
 export interface Project {
-  id?: string;
+  id: string;
   title: string;
   description?: string;
-  deadline: Date | string; // Use Date for JavaScript Date object or string for ISO date string
+  deadline: Date | string;
   status: TaskStatus;
   image: string;
   tasks: Task[];
@@ -28,3 +31,7 @@ export interface TaskProjectInfo {
   title: string;
   image: string;
 }
+
+export type validFormData =
+  | z.infer<typeof ProjectSchema>
+  | z.infer<typeof TaskCreationSchema>;

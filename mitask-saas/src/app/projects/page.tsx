@@ -1,4 +1,4 @@
-import SideNavBar from "&/components/layout/SideNavBar";
+import SideNavBar from "&/components/layout/SideNavigation/SideBar";
 import { ProjectList } from "&/components/project/ProjectList";
 import TaskSection from "&/components/task/TaskSection";
 

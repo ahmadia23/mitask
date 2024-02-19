@@ -10,11 +10,10 @@ import {
   FormMessage,
 } from "../ui/form";
 
-import z from "zod";
+import z, { ZodError } from "zod";
 import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Project, TaskStatus } from "../../../types/tasks";
 import { Textarea } from "../ui/textarea";
 import {
   Select,
@@ -26,42 +25,46 @@ import {
 } from "../ui/select";
 import { DatePicker } from "../ui/datePicker";
 import { createProject } from "&/lib/actions";
+import { ProjectSchema } from "&/schema/tasks";
 
 interface NewProjectFormProps {
   onCancel: () => void;
   onProjectCreate: (id: string) => void;
 }
 
-const ProjectSchema = z.object({
-  title: z.string().max(255),
-  description: z.string(),
-  deadline: z.date().optional(),
-  status: z.nativeEnum(TaskStatus).optional(),
-  image: z.string().max(255).url().optional(),
-});
+interface ValidationError {
+  field: string;
+  message: string;
+}
 
 export const NewProjectForm: React.FC<NewProjectFormProps> = (props) => {
   const { onCancel, onProjectCreate } = props;
   const [date, setDate] = useState<Date>(new Date());
-  const form = useForm<z.infer<typeof ProjectSchema>>({
-    defaultValues: {
-      title: "",
-    },
-  });
+  const [error, setError] = useState<ValidationError[]>();
+  const form = useForm<z.infer<typeof ProjectSchema>>();
 
-  async function onSubmit(values: z.infer<typeof ProjectSchema>) {
-    const project = {
-      title: values.title,
-      description: values.description,
-      image: values.image,
-      status: values.status || ("open" as TaskStatus),
-      deadline: date,
-    };
+  async function onSubmit(projectData: z.infer<typeof ProjectSchema>) {
+    const result = ProjectSchema.safeParse(projectData);
 
-    const projectCreated = await createProject(project);
+    if (result.success) {
+      try {
+        const projectCreated = await createProject(result.data);
 
-    if (projectCreated) {
-      onProjectCreate(projectCreated.id as string);
+        if (projectCreated) {
+          onProjectCreate(projectCreated.id);
+        }
+      } catch (error) {
+        // if (error instanceof ZodError) {
+        //   // Convert ZodError to a simpler format for the UI
+        //   const errors: ValidationError[] = error.errors.map((err) => ({
+        //     field: err.path[0], // Assuming error paths are simple
+        //     message: err.message,
+        //   }));
+        //   setError(errors);
+        // }
+      }
+    } else {
+      // setError(result.error.format());
     }
   }
 

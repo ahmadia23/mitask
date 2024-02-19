@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "./button";
+import { Button } from "../ui/button";
 import {
   DialogHeader,
   DialogFooter,
@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from "./dialog";
+} from "../ui/dialog";
 import { Task } from "../../../types/tasks";
 import { deleteATask } from "&/lib/actions";
 
