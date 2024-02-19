@@ -9,9 +9,9 @@ import {
   CardDescription,
 } from "../ui/Cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { DeleteModal } from "../ui/DeleteModal";
-import { deleteATask } from "&/lib/actions";
+import { TaskProjectInfo } from "../../../types/tasks";
 
 const statusMapper = {
   in_progress: "En cours",
@@ -26,19 +26,14 @@ interface ITaskCard {
   status?: "in_progress" | "done" | "open";
 }
 
-interface TaskProjectProps {
-  image: string;
-  projectName: string;
-}
-
 interface TaskCardProps {
   task: ITaskCard;
-  project: TaskProjectProps;
+  project: TaskProjectInfo;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
   const { task_id, title, description, status } = task;
-  const { image, projectName } = project;
+  const { image, title: projectName } = project;
 
   return (
     <Card className="flex flex-col group hover:shadow-custom cursor-pointer">

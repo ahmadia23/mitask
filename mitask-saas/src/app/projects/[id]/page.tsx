@@ -19,7 +19,7 @@ export const Page = async ({ params }: { params: { id: string } }) => {
         }}
         width="1440"
       />
-      <ProjectDetails {...project}></ProjectDetails>
+      <ProjectDetails project={project}></ProjectDetails>
     </div>
   );
 };

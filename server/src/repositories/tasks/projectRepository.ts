@@ -20,8 +20,14 @@ export class ProjectRepository {
   public async findProjectById(id: any): Promise<Project | void> {
     try {
       const project = await AppDataSource.getRepository(Project).findOneOrFail({
+        relations: {
+          tasks: true,
+        },
         where: {
           id: id,
+          tasks: {
+            projectId: id,
+          },
         },
       });
 

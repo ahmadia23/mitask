@@ -14,76 +14,38 @@ export const ProjectDetailsOverview: React.FC<ProjectDetailsOverviewProps> = (
 
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <PackageIcon className="w-6 h-6" />
-          <h1 className="text-3xl font-bold">{title}</h1>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <PackageIcon className="w-6 h-6" />
+            <h1 className="text-3xl font-bold">{title}</h1>
+          </div>
+          <p className="text-gray-500 dark:text-gray-400">{description}</p>
         </div>
-        <p className="text-gray-500 dark:text-gray-400">{description}</p>
 
-        <div className="flex gap-1 items-center">
-          <CalendarIcon className="w-4 h-4" />
-          <h3 className="text-lg font-bold">Deadline</h3>
-        </div>
-        <p>
-          {new Intl.DateTimeFormat("en-GB", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          }).format(new Date(deadline))}
-        </p>
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex gap-1 items-center">
+              <CalendarIcon className="w-4 h-4" />
+              <h3 className="text-lg font-bold">Deadline</h3>
+            </div>
+            <p>
+              {new Intl.DateTimeFormat("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }).format(new Date(deadline))}
+            </p>
+          </div>
 
-        <div className="flex items-center gap-2">
-          <CalendarIcon className="w-4 h-4" />
-          <h3 className="text-lg font-bold">Completed</h3>
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="w-4 h-4" />
+              <h3 className="text-lg font-bold">Completed</h3>
+            </div>
+            <p>50%</p>
+          </div>
         </div>
-        <p></p>
-
-        <div className="flex items-center gap-2">
-          <UsersIcon className="w-4 h-4" />
-          <h3 className="text-lg font-bold">Members</h3>
-        </div>
-        <ul className="flex gap-2">
-          <li>
-            <img
-              alt="Avatar"
-              className="rounded-full border"
-              height="32"
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "32/32",
-                objectFit: "cover",
-              }}
-              width="32"
-            />
-          </li>
-          <li>
-            <img
-              alt="Avatar"
-              className="rounded-full border"
-              height="32"
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "32/32",
-                objectFit: "cover",
-              }}
-              width="32"
-            />
-          </li>
-          <li>
-            <img
-              alt="Avatar"
-              className="rounded-full border"
-              height="32"
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "32/32",
-                objectFit: "cover",
-              }}
-              width="32"
-            />
-          </li>
-        </ul>
       </div>
     </div>
   );

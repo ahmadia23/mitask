@@ -5,7 +5,7 @@ export interface Task {
   deadline?: Date | string;
   status?: TaskStatus;
   projectId?: Project["id"];
-  project?: Project;
+  project: Project;
 }
 
 export enum TaskStatus {
@@ -21,5 +21,10 @@ export interface Project {
   deadline: Date | string; // Use Date for JavaScript Date object or string for ISO date string
   status: TaskStatus;
   image: string;
-  tasks?: Task[];
+  tasks: Task[];
+}
+
+export interface TaskProjectInfo {
+  title: string;
+  image: string;
 }

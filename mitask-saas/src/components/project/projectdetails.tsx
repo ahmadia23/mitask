@@ -1,15 +1,25 @@
 import { ProjectDetailsOverview } from "./ProjectDetailsOverview";
 import { ProjectCommentCard } from "./ProjectCommentCard";
 
-import { getProject } from "&/lib/actions";
-import { Project } from "../../../types/tasks";
+import { Project, Task } from "../../../types/tasks";
+import { ProjectTasksList } from "./ProjectTasksList";
 
-interface ProjectDetailsProps extends Project {}
+interface ProjectDetailsProps {
+  project: Project;
+}
 
 export const ProjectDetails: React.FC<ProjectDetailsProps> = async (props) => {
+  const { project } = props;
+  const tasks = project.tasks as Task[];
+  const taskProjectInfo = { title: project.title, image: project.image };
+
   return (
     <div className="flex flex-col gap-16 w-full py-8 px-16">
-      <ProjectDetailsOverview {...props}></ProjectDetailsOverview>
+      <ProjectDetailsOverview {...project}></ProjectDetailsOverview>
+      <ProjectTasksList
+        tasks={tasks}
+        project={taskProjectInfo}
+      ></ProjectTasksList>
       <ProjectCommentCard></ProjectCommentCard>
     </div>
   );
