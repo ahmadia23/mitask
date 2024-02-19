@@ -43,7 +43,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, project }) => {
           icon={faXmark}
         ></FontAwesomeIcon>
       </DeleteModal>
-      <Link href={`tasks/${task_id}`} className="md:w-96">
+      <Link href={`/tasks/${task_id}`} className="md:w-96">
         <CardHeader className="flex justify-between items-center">
           <CardTitle className="text-lg font-medium">{title}</CardTitle>
           <span className="text-xs text-gray-500 dark:text-gray-400">

@@ -1,4 +1,4 @@
-import Settings from "&/components/sttings";
+import Settings from "&/components/settings";
 
 export const Page = () => {
   return (

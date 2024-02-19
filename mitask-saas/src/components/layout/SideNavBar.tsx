@@ -27,8 +27,6 @@ const SideNavBar: React.FC = () => {
     }
   });
 
-  console.log(showSidebar(pathname));
-
   return (
     <div
       className="top-10 z-10 group cursor-pointer fixed"
@@ -38,10 +36,10 @@ const SideNavBar: React.FC = () => {
       onMouseLeave={() => setSidebarIsVisible(false)}
     >
       <nav
-        className={`bg-background flex flex-col items-center w-64  py-32 h-screen ${
+        className={`bg-background flex flex-col items-center w-8 py-32 h-screen ${
           isMobile
             ? ""
-            : "opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300  bg-gray-100"
+            : "opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300  bg-gray-100 group-hover:w-64"
         } " ${isMobile && "justify-around"}`}
         ref={ref}
       >
