@@ -7,7 +7,6 @@ import { NewProjectForm } from "./NewProjectForm";
 import { AddProjectSkeleton } from "./AddProjectSkeleton";
 import { useTaskCreationStore } from "&/zustand/taskCreationStore";
 import { usePathname } from "next/navigation";
-import { GET_PROJECT, GET_PROJECTS } from "&/app/tasks/api/route";
 
 export const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -16,11 +15,11 @@ export const ProjectList: React.FC = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setProjects(await GET_PROJECTS());
+    const fetchProjectsAction = async () => {
+      setProjects(await getProjects());
     };
-    fetchProjects();
-  }, [GET_PROJECTS]);
+    fetchProjectsAction();
+  }, [getProjects]);
 
   const handleNewProjectSubmit = async (id: Project["id"]) => {
     const newProject = await getProject(id);

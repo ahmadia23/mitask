@@ -3,7 +3,7 @@ import { Task, TaskStatus } from "../../types/tasks";
 import { getTasks } from "&/lib/actions";
 
 type TaskCreationStore = {
-  task: Omit<Task, "project">;
+  task: Partial<Task>;
   taskUpdate: (update: { [P in keyof Omit<Task, "project">]: Task[P] }) => void;
 };
 type TasksStore = {
@@ -20,6 +20,7 @@ export const useTaskCreationStore = create<TaskCreationStore>()((set) => ({
     projectId: "",
     deadline: "",
     status: undefined,
+    project: undefined,
   },
 
   taskUpdate: (taskUpdate) => {

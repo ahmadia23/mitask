@@ -8,7 +8,7 @@ import { z } from "zod";
 
 export const getTasks = async () => {
   try {
-    const result = await fetch("http://localhost:5001/api/tasks");
+    const result = await fetch("http://localhost:5005/api/tasks");
     const response = await result.json();
 
     return response.data;
@@ -19,7 +19,7 @@ export const getTasks = async () => {
 
 export const getTasksByParams = async () => {
   try {
-    const result = await fetch("http://localhost:5001/api/tasks?title=réunion");
+    const result = await fetch("http://localhost:5005/api/tasks?title=réunion");
     const response = await result.json();
 
     return response.data;
@@ -30,7 +30,7 @@ export const getTasksByParams = async () => {
 
 export const getTask = async (id: string) => {
   try {
-    const result = await fetch(`http://localhost:5001/api/tasks/${id}`);
+    const result = await fetch(`http://localhost:5005/api/tasks/${id}`);
     const response = await result.json();
 
     return response.data;
@@ -41,7 +41,7 @@ export const getTask = async (id: string) => {
 
 export const getProject = async (id: Project["id"]) => {
   try {
-    const result = await fetch(`http://localhost:5001/api/projects/${id}`);
+    const result = await fetch(`http://localhost:5005/api/projects/${id}`);
     const response = await result.json();
 
     return response.data;
@@ -52,7 +52,7 @@ export const getProject = async (id: Project["id"]) => {
 
 export const getProjects = async () => {
   try {
-    const result = await fetch("http://localhost:5001/api/projects");
+    const result = await fetch("http://localhost:5005/api/projects");
     const response = await result.json();
 
     return response.data;
@@ -61,9 +61,9 @@ export const getProjects = async () => {
   }
 };
 
-export async function createATask(task: Task) {
+export async function createATask(task: Partial<Task>) {
   try {
-    const result = await fetch("http://localhost:5001/api/tasks", {
+    const result = await fetch("http://localhost:5005/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export async function createATask(task: Task) {
 
 export async function deleteATask(taskId: Task["task_id"]) {
   try {
-    const result = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+    const result = await fetch(`http://localhost:5005/api/tasks/${taskId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export async function createProject(
   try {
     const project = ProjectSchema.parse(projectData);
 
-    const result = await fetch("http://localhost:5001/api/projects", {
+    const result = await fetch("http://localhost:5005/api/projects", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

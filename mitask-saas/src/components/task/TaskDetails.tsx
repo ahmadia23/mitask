@@ -3,7 +3,6 @@ import TaskDetailsForm from "./TaskDetailsForm";
 import Image from "next/image";
 import { getProjects, getTask } from "&/lib/actions";
 import { Project, Task } from "../../../types/tasks";
-import { handleCreateTaskSubmit } from "../funnels/TaskCreationTaskStep";
 
 interface TaskDetailsProps {
   id: string;
@@ -27,7 +26,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = async (props) => {
         height={800}
       ></Image>
       <h1 className="text-3xl text-foreground">{task.title}</h1>
-      <TaskDetailsForm handleCreateTaskSubmit={handleCreateTaskSubmit} />
+      <TaskDetailsForm />
       {/* <TaskDescription task></TaskDescription> */}
     </div>
   );

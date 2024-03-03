@@ -1,7 +1,5 @@
 import HomeDashboard from "&/components/ui/test";
 
-export const Page = () => {
+export default function Page() {
   return <HomeDashboard />;
-};
-
-export default Page;
+}

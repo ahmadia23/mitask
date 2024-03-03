@@ -40,7 +40,7 @@ const TaskDetailsForm: React.FC<TaskDetailsFormProps> = ({ existingTask }) => {
   const router = useRouter();
 
   const handleCreateTaskSubmit = async (
-    task: Pick<Task, "title" | "description" | "deadline" | "status">,
+    task: Partial<Task>,
     isTaskValid: boolean
   ) => {
     if (isTaskValid) {

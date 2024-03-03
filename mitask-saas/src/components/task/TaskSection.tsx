@@ -27,7 +27,7 @@ const TaskSection: React.FC<TaskSectionProps> = async ({ status }) => {
             return (
               <TaskCard
                 task={task}
-                project={{ image: project.image, projectName: project.title }}
+                project={{ image: project.image, title: project.title }}
               ></TaskCard>
             );
           })}

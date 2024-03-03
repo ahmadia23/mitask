@@ -3,7 +3,7 @@ import { getProject } from "&/lib/actions";
 import Image from "next/image";
 import { Project } from "../../../../types/tasks";
 
-export const Page = async ({ params }: { params: { id: string } }) => {
+export default async function Page({ params }: { params: { id: string } }) {
   const project = (await getProject(params.id)) as Project;
 
   return (
@@ -22,6 +22,4 @@ export const Page = async ({ params }: { params: { id: string } }) => {
       <ProjectDetails project={project}></ProjectDetails>
     </div>
   );
-};
-
-export default Page;
+}

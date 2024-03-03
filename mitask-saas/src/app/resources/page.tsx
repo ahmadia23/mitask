@@ -8,13 +8,11 @@ const youtubeVideoIds = [
   "fJ9rUzIMcZQ", // Example Video 5
 ];
 
-export const Page = () => {
+export default function Page() {
   return (
     <div className="container flex flex-col pt-16 w-full gap-8">
       <h1 className="mt-8 text-lg font-bold">Ressources</h1>
       <VideoGallery videoIds={youtubeVideoIds} />
     </div>
   );
-};
-
-export default Page;
+}
