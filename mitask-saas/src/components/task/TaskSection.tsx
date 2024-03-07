@@ -2,7 +2,6 @@ import React from "react";
 import TaskCard from "./TaskCard";
 import { Project, Task } from "../../../types/tasks";
 import { getProjects, getTasks, getTasksByParams } from "&/lib/actions";
-import { useTasksStore } from "&/zustand/taskCreationStore";
 
 interface TaskSectionProps {
   status?: string;
